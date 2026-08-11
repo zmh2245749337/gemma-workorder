@@ -17,6 +17,21 @@
 
 > 手写生成循环 → 验证与 Hugging Face 贪心解码一致 → 比较有无 KV Cache → 比较不同精度 → 在固定题集上检查质量 → 保存完整实验记录
 
+## Tesla T4 实测结果
+
+首轮实验于 2026-08-11 在 Colab Tesla T4 上完成，固定 `batch_size=1`、相同提示词、1次预热和3次正式重复：
+
+- 手写 greedy 解码与 Hugging Face `model.generate` 的新 token ID 完全一致；
+- 生成128 tokens时，KV Cache 使 FP16 解码吞吐量提升 **11.9%**，使4-bit吞吐量提升 **40.3%**；
+- 4-bit 相比 FP16 的峰值显存下降 **51.2%**，但开启 Cache 时解码吞吐量下降约 **35.0%–36.9%**；
+- 20条固定中文任务上，FP16通过 `11/20`，4-bit通过 `6/20`。该结果只用于当前任务集的回归检查，不代表通用模型能力。
+
+![吞吐量对比](reports/t4_20260811/decode_throughput.png)
+
+![峰值显存对比](reports/t4_20260811/peak_memory.png)
+
+完整方法、失败样例、限制和部署结论见[首轮实验报告](reports/t4_20260811/REPORT.md)。
+
 ## 目录
 
 ```text
@@ -26,7 +41,7 @@ notebooks/               Colab 运行入口
 scripts/                 可直接运行的实验入口
 src/gemma_eval/          模型加载、手写解码、基准与评测代码
 tests/                   不下载模型即可运行的单元测试
-reports/                 实验结果说明；真实运行结果默认不提交
+reports/                 复核后的原始记录、图表和实验报告
 requirements-colab.txt   Colab 依赖
 ```
 
@@ -134,6 +149,6 @@ python scripts/run_quality_eval.py \
 - [x] KV Cache / 无 Cache 统一基准入口
 - [x] FP16/BF16/8-bit/4-bit 模型加载入口
 - [x] 固定中文题集与可追溯结果格式
-- [ ] 在 Colab T4 上生成第一份真实实验记录
-- [ ] 根据真实结果绘制图表并撰写结论
+- [x] 在 Colab T4 上生成第一份真实实验记录
+- [x] 根据真实结果绘制图表并撰写结论
 - [ ] 扩充到 40–50 条评测样本并进行人工抽检
