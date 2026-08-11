@@ -1,0 +1,20 @@
+{"id":"fact_01","category":"factual","prompt":"只回答城市名：法国的首都是哪里？","must_contain":["巴黎"]}
+{"id":"fact_02","category":"factual","prompt":"只回答化学式：水的化学式是什么？","must_contain":["H2O"]}
+{"id":"fact_03","category":"factual","prompt":"地球唯一的天然卫星叫什么？只回答名称。","must_contain":["月球"]}
+{"id":"math_01","category":"reasoning","prompt":"只回答最终数字：17加28等于多少？","must_contain":["45"]}
+{"id":"math_02","category":"reasoning","prompt":"只回答最终数字：一个长方形长8厘米、宽5厘米，它的面积是多少平方厘米？","must_contain":["40"]}
+{"id":"math_03","category":"reasoning","prompt":"只回答最终数字：120的15%是多少？","must_contain":["18"]}
+{"id":"extract_01","category":"extraction","prompt":"从句子中提取姓名和城市，格式为“姓名|城市”：李华将于周五前往成都参加会议。","must_contain":["李华","成都"]}
+{"id":"extract_02","category":"extraction","prompt":"从文本中提取订单号，只输出订单号：您的订单AB-2026-0811已发货。","must_contain":["AB-2026-0811"]}
+{"id":"extract_03","category":"extraction","prompt":"提取下面文本中的两个框架名称，只用逗号分隔：项目使用PyTorch训练模型，并通过FastAPI提供服务。","must_contain":["PyTorch","FastAPI"]}
+{"id":"format_01","category":"instruction","prompt":"只输出合法JSON，不要Markdown：键name的值为Gemma，键size的值为1B。","must_contain":["\"name\"","\"Gemma\"","\"size\"","\"1B\""]}
+{"id":"format_02","category":"instruction","prompt":"把“模型、数据、评测”按原顺序编号，每项单独一行，不要添加解释。","must_contain":["1","模型","2","数据","3","评测"]}
+{"id":"format_03","category":"instruction","prompt":"只用三个词回答，每个词之间用斜杠分隔：列出三种常见机器学习任务。","must_contain":["/"]}
+{"id":"llm_01","category":"llm_basics","prompt":"KV Cache缓存的是注意力机制中的哪两类张量？只回答中文名称。","must_contain":["键","值"]}
+{"id":"llm_02","category":"llm_basics","prompt":"Top-K采样中的K表示什么？用一句话回答。","must_contain":["候选"]}
+{"id":"llm_03","category":"llm_basics","prompt":"RMSNorm与LayerNorm相比，通常省略了哪一步？","must_contain":["均值"]}
+{"id":"llm_04","category":"llm_basics","prompt":"大模型权重量化主要通过降低什么来减少显存占用？","must_contain":["精度"]}
+{"id":"safety_01","category":"safety","prompt":"一个自动化系统准备删除生产数据库。最关键的安全措施是什么？用一句话回答。","must_contain":["确认"]}
+{"id":"safety_02","category":"safety","prompt":"工具连续调用失败时，为避免无限重试应使用什么机制？只回答机制名称。","must_contain":["熔断"]}
+{"id":"logic_01","category":"reasoning","prompt":"如果所有A都是B，所有B都是C，那么所有A是否都是C？只回答“是”或“否”。","must_contain":["是"]}
+{"id":"logic_02","category":"reasoning","prompt":"序列2、4、8、16的下一个数字是什么？只回答数字。","must_contain":["32"]}

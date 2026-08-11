@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+outputs/
+reports/*.csv
+reports/*.json
+reports/*.jsonl
+!reports/README.md

@@ -1,0 +1,18 @@
+[project]
+name = "gemma-inference-eval"
+version = "0.1.0"
+description = "Reproducible decoding, KV-cache, quantization and quality evaluation experiments for Gemma 3 1B-it."
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.4",
+  "transformers>=4.50.0,<6",
+  "accelerate>=1.0",
+  "bitsandbytes>=0.45",
+  "huggingface-hub>=0.27",
+  "pandas>=2.0",
+  "psutil>=5.9",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
