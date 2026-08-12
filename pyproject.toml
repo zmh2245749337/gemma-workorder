@@ -1,7 +1,7 @@
 [project]
 name = "gemma-inference-eval"
-version = "0.1.0"
-description = "Reproducible decoding, KV-cache, quantization and quality evaluation experiments for Gemma 3 1B-it."
+version = "0.2.0"
+description = "White-box Gemma 3 architecture reproduction, numerical alignment and efficient inference experiments."
 requires-python = ">=3.10"
 dependencies = [
   "torch>=2.4",
