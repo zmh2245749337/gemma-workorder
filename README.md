@@ -113,6 +113,12 @@ python scripts/run_core_alignment.py --precision fp16 --layers 0 5 25
 - 这是推理内核复现与实验项目，不是从零预训练、微调或生产级推理引擎。
 - eager PyTorch 实现优先可读性与可验证性，不宣称快于 FlashAttention 或 Transformers 优化内核。
 
+## 下一阶段：Gemma-WorkOrder 场景升级
+
+项目计划在现有白盒 Decoder、权重对齐与推理实验基础上，增加“设备故障工单结构化与本地工具路由”场景。模型负责字段抽取、缺失信息识别和有限工具选择；设备事实与专业说明来自本地 SQLite/手册数据，不让1B模型独立进行高风险故障诊断。
+
+完整范围、数据Schema、QLoRA、Adapter合并、自研Decoder验证、工具协议、评估指标和Phase A～D停止点见：[Gemma-WorkOrder升级路线](docs/Gemma_WorkOrder升级路线.md)。该文档描述后续计划，相关功能完成前不作为既成成果写入简历。
+
 ## 参考资料
 
 - [Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786)
