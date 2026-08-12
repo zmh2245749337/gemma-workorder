@@ -43,7 +43,14 @@ python scripts/run_core_alignment.py \
   --output reports/core_alignment.json
 ```
 
-> 当前仓库已经实现对齐流程；官方权重对齐的具体数值需要在 Colab GPU 实际运行后写入，仓库不会预填未验证指标。
+2026-08-12 在 Tesla T4、FP16、PyTorch 2.11.0 与 Transformers 5.13.1 环境完成官方权重对齐：
+
+- 第 0 层（Sliding Attention）、第 5 层（Global Attention）、第 25 层（Sliding Attention）的最大/平均绝对误差均为 `0.0`；
+- 三层输出的余弦相似度四舍五入后均为 `1.0`，并全部通过 `atol=1e-2, rtol=1e-2` 的 `allclose`；
+- 最后一个 token 的完整 logits 最大/平均绝对误差均为 `0.0`；
+- 官方实现与独立实现的 top-1 token ID 均为 `57137`。
+
+原始证据见 [`reports/core_alignment_20260812/core_alignment.json`](reports/core_alignment_20260812/core_alignment.json)。上述结论只针对报告记录的模型版本、硬件、精度与输入，不外推为所有输入和运行环境都能位级一致。
 
 ### 3. 推理生成与优化
 
@@ -102,7 +109,7 @@ python scripts/run_core_alignment.py --precision fp16 --layers 0 5 25
 ## 简历使用边界
 
 - 可以写：独立实现了哪些模块、怎样做官方权重对齐、已真实跑出的 T4 指标。
-- 对齐脚本尚未运行前，不能写具体误差、余弦相似度或“完全一致”。
+- 可以引用本次对齐报告中的 `0.0` 误差与 top-1 一致，但必须同时说明测试模型、FP16 环境和测试范围。
 - 这是推理内核复现与实验项目，不是从零预训练、微调或生产级推理引擎。
 - eager PyTorch 实现优先可读性与可验证性，不宣称快于 FlashAttention 或 Transformers 优化内核。
 

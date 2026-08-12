@@ -72,6 +72,10 @@ python scripts/run_core_alignment.py \
 
 第 0、25 层覆盖局部注意力，第 5 层覆盖全局注意力。只有实际生成的 `reports/core_alignment.json` 才是可写入简历的数值证据。
 
+### 已验证结果
+
+2026-08-12 在 Tesla T4、FP16 环境完成一次官方权重对齐。第 0、5、25 层以及最后一个 token 的 logits 最大/平均绝对误差均为 `0.0`，官方实现与独立实现的 top-1 token ID 均为 `57137`。原始记录位于 [`reports/core_alignment_20260812/core_alignment.json`](../reports/core_alignment_20260812/core_alignment.json)。该结果证明本次记录的输入和环境下两条前向链路一致，不代表未经测试的所有输入与环境。
+
 ## 4. 面试时必须能讲清的边界
 
 - 这是**推理内核复现与权重对齐**，不是从零预训练模型。
