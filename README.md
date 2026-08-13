@@ -1,7 +1,6 @@
 # Gemma-WorkOrder：Gemma 3-1B QLoRA 工单结构化与受控工具调用
 
 [![一键运行 WorkOrder Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zmh2245749337/gemma-workorder/blob/main/notebooks/Gemma_WorkOrder_Run_All_Colab.ipynb)
-[![白盒 Decoder 对齐 Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/zmh2245749337/gemma-workorder/blob/main/notebooks/Gemma3_Core_Alignment_Colab.ipynb)
 
 面向设备运维记录的轻量级本地大模型原型：使用 4bit QLoRA 将 `google/gemma-3-1b-it` 适配为中文工单结构化模型，经 JSON Schema 与工具白名单校验后查询本地可信数据，最终只生成待人工确认的工单草稿。
 
