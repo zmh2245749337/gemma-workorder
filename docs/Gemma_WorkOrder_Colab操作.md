@@ -13,8 +13,8 @@
 新建 Colab Notebook，依次运行：
 
 ```python
-!git clone https://github.com/zmh2245749337/gemma-inference-eval.git
-%cd gemma-inference-eval
+!git clone https://github.com/zmh2245749337/gemma-workorder.git
+%cd gemma-workorder
 !pip -q install -r requirements-colab.txt
 ```
 

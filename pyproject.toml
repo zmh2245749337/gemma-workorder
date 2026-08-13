@@ -1,7 +1,7 @@
 [project]
-name = "gemma-inference-eval"
-version = "0.2.0"
-description = "White-box Gemma 3 architecture reproduction, numerical alignment and efficient inference experiments."
+name = "gemma-workorder"
+version = "0.3.0"
+description = "Gemma 3-1B QLoRA work-order extraction with constrained local tools and white-box decoder validation."
 requires-python = ">=3.10"
 dependencies = [
   "torch>=2.4",
