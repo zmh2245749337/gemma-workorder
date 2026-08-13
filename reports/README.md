@@ -2,9 +2,13 @@
 
 运行脚本后会在这里产生 CSV、JSON 或 JSONL。临时结果默认被 `.gitignore` 忽略，防止不同硬件的实验相互覆盖。
 
-经过复核的首轮公开结果位于 [`t4_20260811/`](t4_20260811/)，包含原始数据、三张图表和完整实验报告。
+当前公开证据分为三组：
 
-准备公开结果时，建议只提交一份经过复核的报告，并至少包含：
+- [`workorder_experiment_20260813/`](workorder_experiment_20260813/)：QLoRA 工单结构化、Base-vs-QLoRA 指标和合并权重白盒复核；
+- [`core_alignment_20260812/`](core_alignment_20260812/)：官方 Gemma 与独立 Decoder 的原始数值对齐记录；
+- [`t4_20260811/`](t4_20260811/)：KV Cache、FP16/4bit、吞吐和显存实验的原始数据、图表与报告。
+
+新增公开结果时，只提交经过复核的报告，并至少包含：
 
 - Colab GPU 型号和运行时间；
 - PyTorch、Transformers、bitsandbytes 版本；
