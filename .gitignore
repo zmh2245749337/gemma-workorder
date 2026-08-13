@@ -3,8 +3,13 @@ __pycache__/
 .pytest_cache/
 .venv/
 .env
+artifacts/
+data/workorder/
 outputs/
 reports/*.csv
 reports/*.json
 reports/*.jsonl
 !reports/README.md
+!reports/workorder_phase_a_demo.json
+!reports/workorder_experiment_20260813/
+!reports/workorder_experiment_20260813/REPORT.md

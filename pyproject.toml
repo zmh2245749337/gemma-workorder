@@ -12,6 +12,9 @@ dependencies = [
   "pandas>=2.0",
   "matplotlib>=3.7",
   "psutil>=5.9",
+  "peft>=0.14",
+  "fastapi>=0.115",
+  "uvicorn>=0.30",
 ]
 
 [tool.pytest.ini_options]

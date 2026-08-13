@@ -3,11 +3,17 @@ from __future__ import annotations
 import argparse
 import json
 import platform
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 import torch
+
+# Allow direct execution in Colab without requiring ``pip install -e .``.
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
 
 from gemma_eval.gemma3_core import Gemma3CoreConfig, Gemma3CoreForCausalLM, alignment_metrics
 from gemma_eval.modeling import DEFAULT_MODEL_ID, build_chat_inputs, load_model_bundle, model_device

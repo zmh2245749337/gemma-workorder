@@ -113,9 +113,80 @@ python scripts/run_core_alignment.py --precision fp16 --layers 0 5 25
 - 这是推理内核复现与实验项目，不是从零预训练、微调或生产级推理引擎。
 - eager PyTorch 实现优先可读性与可验证性，不宣称快于 FlashAttention 或 Transformers 优化内核。
 
+## Gemma-WorkOrder：场景化升级已完成
+
+在现有白盒 Decoder、权重对齐与推理实验基础上，项目已完成“设备故障工单结构化与本地工具路由”场景。模型负责字段抽取、缺失信息识别和有限工具选择；设备事实与专业说明来自本地 SQLite/手册数据，不让1B模型独立进行高风险故障诊断。
+
+完整范围、数据 Schema、QLoRA、Adapter 合并、自研 Decoder 验证、工具协议、评估指标和 Phase A～D 停止点见：[Gemma-WorkOrder升级路线](docs/Gemma_WorkOrder升级路线.md)。实际运行指标和边界见：[Gemma-WorkOrder 实验报告](reports/workorder_experiment_20260813/REPORT.md)。
+
+### Phase A：已实现的可运行基线
+
+当前仓库已加入不下载模型权重也能运行的工单原型基础设施：
+
+- `WorkOrderFields` 结构化输出契约、JSON提取与字段/工具白名单校验；
+- 小型非敏感 SQLite 资产、历史维修和故障码参考数据；
+- 安全的本地只读工具执行器与“工单草稿必须人工确认”边界；
+- 透明的规则基线解析器，用于后续 Base Gemma 与 QLoRA Gemma 的对比，**不将其表述为模型能力**；
+- 可复现数据集构建脚本，默认生成90条受控自建样本；
+- 端到端Demo和单元测试。
+
+运行方式：
+
+```bash
+python scripts/run_workorder_demo.py --output reports/workorder_phase_a_demo.json
+python scripts/build_workorder_dataset.py --output-dir data/workorder --samples 90
+pytest -q tests/test_workorder.py
+```
+
+示例输入会被转换为受约束的工单JSON；若存在故障码，系统查询本地故障码表；若关键信息缺失，只返回追问，不执行不安全操作。
+
+### Phase B～D：已完成的训练、评测与白盒复核
+
+以下链路已于 Tesla T4 Colab 环境真实运行；实验结果和适用边界见上文及 [Gemma-WorkOrder 实验报告](reports/workorder_experiment_20260813/REPORT.md)。命令仍可用于复现，不代表上传模型权重或企业数据：
+
+```bash
+# 生成固定随机种子的受控自建数据
+python scripts/build_workorder_dataset.py --output-dir data/workorder --samples 90 --seed 42
+
+# Base Gemma 对照评测
+python scripts/evaluate_workorder.py --precision 4bit --output reports/workorder_base_4bit.json
+
+# QLoRA 训练、Adapter 评测与合并
+python scripts/train_workorder_qlora.py --output-dir artifacts/workorder_qlora_adapter
+python scripts/evaluate_workorder.py --adapter artifacts/workorder_qlora_adapter --output reports/workorder_qlora_4bit.json
+python scripts/merge_workorder_adapter.py --adapter artifacts/workorder_qlora_adapter --output-dir artifacts/workorder_merged
+
+# 合并后 checkpoint 的白盒核心对齐复核
+python scripts/run_core_alignment.py --model-id artifacts/workorder_merged --output reports/workorder_merged_core_alignment.json
+
+# 本地审阅门控 API：先用不下载模型的基线演示
+python scripts/serve_workorder.py --mode baseline
+```
+
+训练采用 4bit NF4 + QLoRA（`q/k/v/o` 和 FFN 投影层），训练目标是固定 JSON Schema。模型输出必须先经过 JSON/字段/工具白名单校验，工具仅能读取本地 SQLite；所有结果都只生成“待人工确认”的工单草稿。完整的 Colab 操作、记录方式和诚实表述边界见：[Gemma-WorkOrder Colab操作](docs/Gemma_WorkOrder_Colab操作.md)。
+
+不想逐格复制命令时，可直接在 Colab 打开并选择“全部运行”：[`Gemma_WorkOrder_Run_All_Colab.ipynb`](notebooks/Gemma_WorkOrder_Run_All_Colab.ipynb)。Notebook 会自动处理 Colab 预装旧版 `torchao` 与 PEFT Adapter 合并的兼容问题。
+
 ## 参考资料
 
 - [Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786)
 - [Google Gemma 3 Model Card](https://ai.google.dev/gemma/docs/core/model_card_3)
 - [Hugging Face Gemma 3 文档](https://huggingface.co/docs/transformers/main/en/model_doc/gemma3)
 - [Transformers Gemma 3 源码](https://github.com/huggingface/transformers/blob/main/src/transformers/models/gemma3/modeling_gemma3.py)
+
+## Gemma-WorkOrder：已完成应用闭环
+
+在已有白盒 Decoder、官方权重对齐和推理实验基础上，本仓库新增了一个受约束的设备故障工单结构化场景：Gemma 仅负责从中文描述中抽取固定 JSON 字段和选择有限的本地只读工具；故障码含义查询本地 SQLite，所有输出只生成待人工确认的草稿，不进行诊断、维修决策或自动派单。
+
+在 Tesla T4 上，以 `google/gemma-3-1b-it` 为基础模型，使用 90 条固定随机种子（42）的受控自建样本（训练/验证/测试：62/14/14）完成 4bit NF4 QLoRA 对照实验：
+
+| 指标 | Base Gemma（4bit） | QLoRA Gemma（4bit） |
+| --- | ---: | ---: |
+| JSON 合法率 | 28.57% | **100.00%** |
+| 字段精确率 | 60.00% | **98.57%** |
+| 工具路由准确率 | 14.29% | **100.00%** |
+| 完整记录精确率 | 0.00% | **85.71%** |
+
+Adapter 合并为 checkpoint 后，继续使用本项目独立实现的 Gemma Decoder 对 Layer 0 / 5 / 25 和最后 token logits 复核，max/mean absolute error 均为 `0.0`，top-1 token 一致。详细设置、指标定义和边界见：[Gemma-WorkOrder 实验报告](reports/workorder_experiment_20260813/REPORT.md)。
+
+可在 Colab 打开 [`Gemma_WorkOrder_Run_All_Colab.ipynb`](notebooks/Gemma_WorkOrder_Run_All_Colab.ipynb)，配置 `HF_TOKEN` 和 T4 GPU 后复现完整流程。
