@@ -119,6 +119,27 @@ python scripts/run_core_alignment.py --precision fp16 --layers 0 5 25
 
 完整范围、数据Schema、QLoRA、Adapter合并、自研Decoder验证、工具协议、评估指标和Phase A～D停止点见：[Gemma-WorkOrder升级路线](docs/Gemma_WorkOrder升级路线.md)。该文档描述后续计划，相关功能完成前不作为既成成果写入简历。
 
+### Phase A：已实现的可运行基线
+
+当前仓库已加入不下载模型权重也能运行的工单原型基础设施：
+
+- `WorkOrderFields` 结构化输出契约、JSON提取与字段/工具白名单校验；
+- 小型非敏感 SQLite 资产、历史维修和故障码参考数据；
+- 安全的本地只读工具执行器与“工单草稿必须人工确认”边界；
+- 透明的规则基线解析器，用于后续 Base Gemma 与 QLoRA Gemma 的对比，**不将其表述为模型能力**；
+- 可复现数据集构建脚本，默认生成90条受控自建样本；
+- 端到端Demo和单元测试。
+
+运行方式：
+
+```bash
+python scripts/run_workorder_demo.py --output reports/workorder_phase_a_demo.json
+python scripts/build_workorder_dataset.py --output-dir data/workorder --samples 90
+pytest -q tests/test_workorder.py
+```
+
+示例输入会被转换为受约束的工单JSON；若存在故障码，系统查询本地故障码表；若关键信息缺失，只返回追问，不执行不安全操作。QLoRA训练、Gemma真实模型解析、Adapter合并和FastAPI属于后续Phase B～D。
+
 ## 参考资料
 
 - [Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786)
