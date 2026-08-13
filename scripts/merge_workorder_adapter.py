@@ -13,6 +13,22 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path("artifacts/workorder_merged"))
     args = parser.parse_args()
 
+    import importlib.metadata
+    import sys
+
+    # Some Colab images bundle torchao 0.10.  PEFT detects it as optional but
+    # rejects it because its torchao integration requires >=0.16.  The merge
+    # path does not use torchao, so hide only that incompatible optional module
+    # for this process rather than requiring a runtime restart.
+    try:
+        version = importlib.metadata.version("torchao")
+        major, minor = (int(value) for value in version.split(".")[:2])
+        if (major, minor) < (0, 16):
+            sys.modules["torchao"] = None
+            print(f"Ignoring incompatible optional torchao {version} during adapter merge")
+    except importlib.metadata.PackageNotFoundError:
+        pass
+
     import torch
     from peft import PeftModel
     from transformers import AutoModelForCausalLM, AutoTokenizer
