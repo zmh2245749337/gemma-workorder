@@ -10,6 +10,7 @@ from .gemma3_core import (
 )
 from .modeling import DEFAULT_MODEL_ID, ModelBundle, load_model_bundle
 from .workorder import WorkOrderFields, initialise_demo_database, run_phase_a
+from .workorder_data import workorder_prompt
 
 __all__ = [
     "DEFAULT_MODEL_ID",
@@ -25,4 +26,5 @@ __all__ = [
     "WorkOrderFields",
     "initialise_demo_database",
     "run_phase_a",
+    "workorder_prompt",
 ]

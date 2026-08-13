@@ -12,6 +12,7 @@ from gemma_eval.workorder import (
     run_phase_a,
     validate_fields,
 )
+from gemma_eval.workorder_data import aggregate_metrics, compare_fields, workorder_prompt
 
 
 @pytest.fixture()
@@ -57,3 +58,24 @@ def test_local_tool_not_found_is_safe(demo_db):
     result = execute_local_tool(demo_db, ToolCall("query_fault_code", {"code": "E99", "asset_type": "风机"}))
     assert result["status"] == "not_found"
 
+
+def test_training_prompt_and_metric_helpers_are_deterministic():
+    prompt = workorder_prompt("A区3号风机显示E07")
+    assert "只输出一个JSON对象" in prompt
+    target = {
+        "asset_name": "A区3号风机",
+        "asset_id": None,
+        "asset_type": "风机",
+        "fault_code": "E07",
+        "symptom": "报警",
+        "occurred_at": "今天上午",
+        "actions_taken": [],
+        "parts_replaced": [],
+        "missing_fields": [],
+        "next_action": "query_fault_code",
+    }
+    comparison = compare_fields(target, target)
+    metrics = aggregate_metrics([{ "json_valid": True, "tool_correct": True, **comparison }])
+    assert comparison["exact_match"] is True
+    assert metrics["field_exact_rate"] == 1.0
+    assert metrics["tool_accuracy"] == 1.0

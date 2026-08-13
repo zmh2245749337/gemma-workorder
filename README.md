@@ -138,7 +138,32 @@ python scripts/build_workorder_dataset.py --output-dir data/workorder --samples 
 pytest -q tests/test_workorder.py
 ```
 
-示例输入会被转换为受约束的工单JSON；若存在故障码，系统查询本地故障码表；若关键信息缺失，只返回追问，不执行不安全操作。QLoRA训练、Gemma真实模型解析、Adapter合并和FastAPI属于后续Phase B～D。
+示例输入会被转换为受约束的工单JSON；若存在故障码，系统查询本地故障码表；若关键信息缺失，只返回追问，不执行不安全操作。
+
+### Phase B～D：可运行训练/评测/接口链路（等待真实 GPU 结果）
+
+仓库现已提供完整实现，但以下命令需要在 Colab GPU 上亲自运行后，才能将真实结果写入项目成果：
+
+```bash
+# 生成固定随机种子的受控自建数据
+python scripts/build_workorder_dataset.py --output-dir data/workorder --samples 90 --seed 42
+
+# Base Gemma 对照评测
+python scripts/evaluate_workorder.py --precision 4bit --output reports/workorder_base_4bit.json
+
+# QLoRA 训练、Adapter 评测与合并
+python scripts/train_workorder_qlora.py --output-dir artifacts/workorder_qlora_adapter
+python scripts/evaluate_workorder.py --adapter artifacts/workorder_qlora_adapter --output reports/workorder_qlora_4bit.json
+python scripts/merge_workorder_adapter.py --adapter artifacts/workorder_qlora_adapter --output-dir artifacts/workorder_merged
+
+# 合并后 checkpoint 的白盒核心对齐复核
+python scripts/run_core_alignment.py --model-id artifacts/workorder_merged --output reports/workorder_merged_core_alignment.json
+
+# 本地审阅门控 API：先用不下载模型的基线演示
+python scripts/serve_workorder.py --mode baseline
+```
+
+训练采用 4bit NF4 + QLoRA（`q/k/v/o` 和 FFN 投影层），训练目标是固定 JSON Schema。模型输出必须先经过 JSON/字段/工具白名单校验，工具仅能读取本地 SQLite；所有结果都只生成“待人工确认”的工单草稿。完整的 Colab 操作、记录方式和诚实表述边界见：[Gemma-WorkOrder Colab操作](docs/Gemma_WorkOrder_Colab操作.md)。
 
 ## 参考资料
 
