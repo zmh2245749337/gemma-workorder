@@ -22,11 +22,16 @@ from gemma_eval.workorder_data import canonical_json, load_jsonl, workorder_prom
 
 
 def encode_example(tokenizer, row: dict, max_length: int) -> dict[str, list[int]]:
-    prompt_ids = tokenizer.apply_chat_template(
+    prompt_encoded = tokenizer.apply_chat_template(
         [{"role": "user", "content": workorder_prompt(row["input_text"])}],
         tokenize=True,
         add_generation_prompt=True,
     )
+    # Transformers 4 returns a list here; newer releases may return a
+    # BatchEncoding.  Normalise both shapes before concatenating labels.
+    prompt_ids = prompt_encoded["input_ids"] if hasattr(prompt_encoded, "get") and "input_ids" in prompt_encoded else prompt_encoded
+    if prompt_ids and isinstance(prompt_ids[0], list):
+        prompt_ids = prompt_ids[0]
     answer_ids = tokenizer(canonical_json(row["output"]), add_special_tokens=False)["input_ids"]
     eos = tokenizer.eos_token_id
     input_ids = (prompt_ids + answer_ids + ([eos] if eos is not None else []))[:max_length]
