@@ -165,6 +165,8 @@ python scripts/serve_workorder.py --mode baseline
 
 训练采用 4bit NF4 + QLoRA（`q/k/v/o` 和 FFN 投影层），训练目标是固定 JSON Schema。模型输出必须先经过 JSON/字段/工具白名单校验，工具仅能读取本地 SQLite；所有结果都只生成“待人工确认”的工单草稿。完整的 Colab 操作、记录方式和诚实表述边界见：[Gemma-WorkOrder Colab操作](docs/Gemma_WorkOrder_Colab操作.md)。
 
+不想逐格复制命令时，可直接在 Colab 打开并选择“全部运行”：[`Gemma_WorkOrder_Full_Colab.ipynb`](notebooks/Gemma_WorkOrder_Full_Colab.ipynb)。Notebook 会自动处理 Colab 预装旧版 `torchao` 与 PEFT Adapter 合并的兼容问题。
+
 ## 参考资料
 
 - [Gemma 3 Technical Report](https://arxiv.org/abs/2503.19786)
