@@ -1,0 +1,52 @@
+{
+  "timestamp_utc": "2026-08-24T14:16:57.456742+00:00",
+  "model_id": "artifacts\\service_query_merged",
+  "prompt": "请用两句话解释 KV Cache 的作用。",
+  "precision": "fp16",
+  "device": "cuda:0",
+  "gpu": "NVIDIA GeForce RTX 3060 Laptop GPU",
+  "python": "3.11.15",
+  "torch": "2.6.0+cu124",
+  "transformers": "5.15.1",
+  "architecture": {
+    "layers": 26,
+    "hidden_size": 1152,
+    "intermediate_size": 6912,
+    "query_heads": 4,
+    "kv_heads": 1,
+    "head_dim": 256,
+    "sliding_window": 512
+  },
+  "layer_alignment": {
+    "0": {
+      "layer_type": "sliding_attention",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "cosine_similarity": 0.9999998807907104,
+      "allclose_atol_1e-2_rtol_1e-2": true
+    },
+    "5": {
+      "layer_type": "full_attention",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "cosine_similarity": 0.9999998807907104,
+      "allclose_atol_1e-2_rtol_1e-2": true
+    },
+    "25": {
+      "layer_type": "sliding_attention",
+      "max_abs_error": 0.0,
+      "mean_abs_error": 0.0,
+      "cosine_similarity": 0.9999998211860657,
+      "allclose_atol_1e-2_rtol_1e-2": true
+    }
+  },
+  "last_token_logits": {
+    "max_abs_error": 0.0,
+    "mean_abs_error": 0.0,
+    "cosine_similarity": 0.9999999403953552,
+    "allclose_atol_1e-2_rtol_1e-2": true,
+    "official_top1_token_id": 57137,
+    "custom_top1_token_id": 57137,
+    "top1_match": true
+  }
+}

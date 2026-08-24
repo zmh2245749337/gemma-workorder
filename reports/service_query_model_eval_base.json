@@ -1,0 +1,2115 @@
+{
+  "scope": "CrossWOZ-derived service-query evaluation; next_action routing is this project's own design layered on real dialogue data.",
+  "model_id": "google/gemma-3-1b-it",
+  "adapter": null,
+  "precision": "4bit",
+  "metrics": {
+    "samples": 300,
+    "json_valid_rate": 0.0,
+    "field_exact_rate": 0.0,
+    "tool_accuracy": 0.0,
+    "record_exact_rate": 0.0
+  },
+  "records": [
+    {
+      "sample_id": "296_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京江苏大厦酒店\"\n  ],\n  \"requested_fields\": [\n    \"地址\",\n    \"周边餐馆\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"北京江苏大厦酒店\"\n  ],\n  \"requested_fields\": [\n    \"地址\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9144_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"毛主席纪念堂\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10123_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"景点周边\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7805_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"出发地：北京空港\",\n    \"目的地：白家大院\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9756_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10091_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"4.5分以上\", \"叫醒服务\", \"租车酒店住宿\"],\n  \"requested_fields\": [\"评分\", \"叫醒服务\", \"租车酒店住宿\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11249_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"电话\", \"稻香村\"],\n  \"requested_fields\": [\"电话\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "251_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"评分\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11409_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"金广快捷酒店(北京首都机场新国展店)\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地附近的地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8017_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分 >= 4.5分\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8524_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"2小时 - 3小时\", \"4分以上\", \"100-150元\"],\n  \"requested_fields\": [\"游玩时长\", \"评分\", \"票价\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8340_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"400-500元\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9202_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"4.5分以上\", \"1小时\"],\n  \"requested_fields\": [\"百丰农场\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11716_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"舒适型\", \"评分 >= 4.5分\"],\n  \"requested_fields\": [\"酒店\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11545_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"鬼味烤翅\"],\n  \"requested_fields\": [\"营业时间\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7501_28",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"唐宫海鲜舫(新世纪店)\"\n  ],\n  \"requested_fields\": [\n    \"呼叫车型\",\n    \"呼叫车牌出车\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"唐宫海鲜舫(新世纪店)\"\n  ],\n  \"requested_fields\": [\n    \"呼叫车型\",\n    \"呼叫车牌出车\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12061_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"国际长途电话\",\n    \"行李寄存\",\n    \"评分是4.5分以上\",\n    \"价格是200-300元\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11303_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"0.5小时 - 1小时\",\n  \"requested_fields\": [\"景点\", \"门票\"],\n  \"missing_fields\": [\"门票\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "290_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"雅悦酒店(北京西直门店)\"\n  ],\n  \"requested_fields\": [\n    \"酒店设施提供租车和叫醒服务吗？\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9219_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"全聚德(双井店)\"\n  ],\n  \"requested_fields\": [\"出发地地铁站\", \"目的地地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9516_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"杏园\"\n  ],\n  \"requested_fields\": [\n    \"电话\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11676_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从北京鹏润国际大酒店到北新桥卤煮\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12479_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"平谷金海湖附近\", \"中午\"],\n  \"requested_fields\": [\"吃饭\"],\n  \"missing_fields\": [\"住宿方便不\"],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10054_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"门票价格20元以下\", \"评分4.5分以上\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"门票价格\", \"评分\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10184_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"南锣鼓巷店\"\n  ],\n  \"requested_fields\": [\n    \"电话\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "190_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"商务中心\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10034_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"5分\", \"不免票\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [\"其他\"],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9594_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分4分以上\",\n    \"最低价格1000元以上\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6877_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"司马台长城到烤肉宛饭庄\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9329_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"西单店\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6613_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"出发地: 北京\",\n    \"目的地: 乐多港奇幻乐园\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "459_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"时间\"],\n  \"requested_fields\": [\"游玩时间\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "24_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10887_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"4.5分以上\", \"1小时 - 2小时\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3903_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"豆腐锅\", \"4.5分以上\"],\n  \"requested_fields\": [\"推荐一家\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7840_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从北京国际雕塑公园到格林豪泰(北京清河桥店)\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "221_22",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"出发地\", \"目的地\"],\n  \"requested_fields\": [\"出发地地铁站\", \"目的地地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8908_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"7天优品酒店(北京国贸劲松地铁站店)到中国国家博物馆\"],\n  \"requested_fields\": [\"上下车\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11185_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"汉庭酒店(北京望京花家地店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9732_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"经济型\",\n    \"评分是4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"推荐\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"经济型\",\n    \"评分是4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"推荐\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "132_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"健身房\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9127_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"将进酒客栈\"\n  ],\n  \"requested_fields\": [\n    \"周边有哪些景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8408_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"前门大街\",\n    \"北京京泰龙国际大酒店\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8876_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"吃到酸菜白肉\", \"干煸鱿鱼丝\", \"人均消费150-500元\"],\n  \"requested_fields\": [\"餐馆\"],\n  \"missing_fields\": [\"人均消费\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2148_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"20-50元\"\n  ],\n  \"requested_fields\": [\n    \"票价\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9604_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"最低价格\", \"残疾人措施\", \"免费国内长途电话\"],\n  \"requested_fields\": [\"酒店\"],\n  \"missing_fields\": [\"免费国内长途电话\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8197_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在50元以下\",\n    \"评分在4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"人均消费\",\n    \"评分\"\n  ],\n  \"missing_fields\": [\n    \"推荐菜\"\n  ],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12334_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从局气(西单店)到北京全聚德(双井店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从局气(西单店)到北京全聚德(双井店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11630_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地: 樱町三味\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9288_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"免费\", \"评分4分以上\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9756_22",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"玩多久\"],\n  \"requested_fields\": [\"玩多久\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12035_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在50 - 100元\"\n  ],\n  \"requested_fields\": [\n    \"推荐家\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9604_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7850_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"100-150元\"\n  ],\n  \"requested_fields\": [\n    \"人均消费\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "128_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"通州北苑店\"\n  ],\n  \"requested_fields\": [\n    \"推荐菜\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11949_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"出发地: 御花园\",\n    \"目的地: 小肠陈饭庄(南横街老店)\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7902_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"出发地：北京东直门\", \"目的地：那家小馆(永安里店)\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10351_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2304_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8929_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分 >= 4.5分\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6151_24",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8994_8",
+      "raw_model_output": "```json\n{\n  \"domain\": null,\n  \"constraints\": [],\n  \"requested_fields\": [],\n  \"missing_fields\": [],\n  \"next_action\": null\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12480_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"国家大剧院附近\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9546_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"盐酥鸡\"\n  ],\n  \"requested_fields\": [\n    \"评分5分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9424_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"万龙洲海鲜大酒楼(大兴店)到水立方（国家游泳中心）\"],\n  \"requested_fields\": [\"出发地附近地铁站、目的地附近地铁站名\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "307_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"价格\", \"无烟房\", \"wifi\"],\n  \"requested_fields\": [\"价格\", \"无烟房\", \"wifi\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11729_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"景点附近\"\n  ],\n  \"requested_fields\": [\n    \"评分4.5分以上的高档型酒店住宿\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7908_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"京仪大酒店到聚宝源\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7297_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9298_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"明天\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6209_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"公共区域\", \"部分房间\"],\n  \"requested_fields\": [\"wifi\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "343_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"从安之家连锁出发\", \"到鱼子山抗日纪念馆\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [\"出发地\", \"目的地\"],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12479_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从北京平谷金海湖到北京东煌凯丽酒店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌号\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11639_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11339_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"炸花椒叶\"],\n  \"requested_fields\": [\"餐厅\", \"炸花椒叶\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11558_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从便宜坊烤鸭店到北京富力万丽酒店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5923_26",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"评分\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4354_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"锦江星(北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"电话\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5331_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"评分 >= 4.5\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "400_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在100-150元\"\n  ],\n  \"requested_fields\": [\n    \"餐馆\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12230_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "262_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"炸花椒盐\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7388_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格：400-500元\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "129_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"残疾人设施\"\n  ],\n  \"requested_fields\": [\n    \"酒店设施\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10784_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"贵都大酒店\"\n  ],\n  \"requested_fields\": [\n    \"餐馆\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12035_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"全聚德(朝阳北路店)\"\n  ],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7388_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"300-400元\"],\n  \"requested_fields\": [\"价格\"],\n  \"missing_fields\": [\"出发地”、“目的地”],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "Invalid control character at: line 5 column 35 (char 115)"
+    },
+    {
+      "sample_id": "11588_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"免费\", \"评分>=4.5分\", \"游玩时长=1天\"],\n  \"requested_fields\": [\"推荐一个好地方\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11635_24",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"花溪渔香小寨\"\n  ],\n  \"requested_fields\": [\n    \"就近有啥可以逛逛的地方吗？\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9628_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"4.5分以上\",\n  \"requested_fields\": [\"评分\", \"游玩的时长\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10038_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从官也街澳门火锅(国贸商城店)到国子监\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9171_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"2小时左右\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10427_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分 >= 4.5分\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10463_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"九鼎\"],\n  \"requested_fields\": [\"评分价格\"],\n  \"missing_fields\": [\"9鼎周边\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8908_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"吹风机\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2979_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"价格 > 1000\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5982_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"天兴居\"\n  ],\n  \"requested_fields\": [\n    \"地址\"\n  ],\n  \"missing_fields\": [\n    \"周边\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10123_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"大渔铁板烧 (蓝色港湾店)\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "262_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"行李寄存\"\n  ],\n  \"requested_fields\": [\n    \"吹风机\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12109_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11035_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京东直门亚朵S酒店\"\n  ],\n  \"requested_fields\": [\n    \"类型\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"北京东直门亚朵S酒店\"\n  ],\n  \"requested_fields\": [\n    \"类型\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7675_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"北京大学中关新园 - 北京亮China Grill\"],\n  \"requested_fields\": [\"去北京亮China Grill\"],\n  \"missing_fields\": [\"起始站和目的地\"],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9744_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"回龙观公园到XY民宿公寓北京三里屯店\"\n  ],\n  \"requested_fields\": [\n    \"上落站点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12400_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"电话\",\n  \"constraints\": [\"地址\", \"电话\"],\n  \"requested_fields\": [\"电话\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9251_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6209_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"评分\", \"宽带上网\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3652_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格在200-300元\"\n  ],\n  \"requested_fields\": [\n    \"酒店住宿\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8723_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"飘HOME连锁酒店(北京西客站店)到全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8721_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"便宜坊烤鸭 (鲜鱼口店)\"\n  ],\n  \"requested_fields\": [\n    \"周边\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"便宜坊烤鸭 (鲜鱼口店)\"\n  ],\n  \"requested_fields\": [\n    \"周边\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2175_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"评分\",\n  \"constraints\": [\"4.5分以上\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_rating_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7501_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"恭王府附近\", \"人均消费\", \"100-150元\", \"5分餐馆\"],\n  \"requested_fields\": [\"恭王府附近\", \"人均消费\", \"100-150元\", \"5分餐馆\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5843_22",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"餐馆附近\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "24_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"白乙化烈士纪念馆\",\n    \"北京华尔顿酒店\"\n  ],\n  \"requested_fields\": [\"车型车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2414_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"类型\",\n    \"价格\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"类型\",\n    \"价格\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8328_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京海洋馆到北京希尔顿逸林酒店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8256_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4433_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"护国寺总店 -> 瑞海姆田园度假村中餐厅\"\n  ],\n  \"requested_fields\": [\n    \"车牌\",\n    \"车型\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11293_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"评分: 4.5分以上\", \"票价: 免费\", \"游玩时长: 2小时\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"格林豪泰(北京首都机场航站楼店)到北京海洋馆\"\n  ],\n  \"requested_fields\": [\n    \"车辆信息\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12084_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京贵都大酒店到故宫\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"从北京贵都大酒店到故宫\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10416_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地: 大董 (南新仓店)\",\n    \"目的地: 格林豪泰酒店北京市首都机场第二店\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3184_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地: 北京\",\n    \"目的地: 金鼎轩·南北菜(地坛店)\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12327_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"水立方嬉水乐园\",\n    \"海底捞火锅(西单店)\"\n  ],\n  \"requested_fields\": [\n    \"附近的地铁站\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5923_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"庆云楼周边\"\n  ],\n  \"requested_fields\": [\n    \"住宿\"\n  ],\n  \"missing_fields\": []\n}\n```\nnext_action: query_hotel_db",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12472_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"5分\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1579_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"评分4分以上, 游玩时长2小时 - 3小时\",\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"游玩时长\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12266_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"从北京香江戴斯酒店到水立方嬉水乐园\"\n  ],\n  \"requested_fields\": [\n    \"出发地附近地铁站、目的地附近地铁站各在哪\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10496_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"雅悦酒店(北京西直门店)\"\n  ],\n  \"requested_fields\": [\"去北京野生动物园\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7922_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"门票免费\"\n  ],\n  \"requested_fields\": [\n    \"推荐的景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9505_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"酒店类型\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7902_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"无烟房\", \"商务中心\"],\n  \"requested_fields\": [\"酒店\"],\n  \"missing_fields\": [\"合作方\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8970_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"故宫周边的\"\n  ],\n  \"requested_fields\": [\n    \"评分\",\n    \"电话\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"故宫\"\n  ],\n  \"requested_fields\": [\n    \"评分\",\n    \"电话\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9985_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"豪华型\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4635_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"带老妈\", \"1小时 - 2小时\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9565_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"明天\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"明天\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9171_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从便宜坊烤鸭(鲜鱼口店)\"\n  ],\n  \"requested_fields\": [\n    \"从便宜坊烤鸭(鲜鱼口店)到故宫\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从便宜坊烤鸭(鲜鱼口店)\"\n  ],\n  \"requested_fields\": [\n    \"从便宜坊烤鸭(鲜鱼口店)到故宫\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8490_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11106_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"SPA\",\n    \"行李寄存\"\n  ],\n  \"requested_fields\": [\n    \"推荐酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11752_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"华联力宝购物中心店\"\n  ],\n  \"requested_fields\": [\n    \"周边有啥旅游的地儿\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"华联力宝购物中心店\"\n  ],\n  \"requested_fields\": [\n    \"周边有啥旅游的地儿\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8111_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"宽带上网\", \"评分 >= 4.5分\"],\n  \"requested_fields\": [\"酒店\"],\n  \"missing_fields\": [\"评分 >= 4.5分\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9546_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"评分4.5分以上\", \"游玩时间0.5小时 - 1小时\"],\n  \"requested_fields\": [\"推荐一家\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8399_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"孩子\", \"鱼\", \"游玩时长3天4.5分评分\", \"票价100-150元\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"游玩时长\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "290_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"人均消费100-150元\", \"评分4分以上\"],\n  \"requested_fields\": [\"推荐\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9241_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在50-100元\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9062_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"如家商旅酒店(北京牡丹园地铁站店)到大鸭梨烤鸭店(观音寺店)乘坐地铁\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "362_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"格林豪泰酒店北京市首都机场第二店\"\n  ],\n  \"requested_fields\": [\n    \"两地附近的地铁站\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12472_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"4分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4327_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"玉林烤鸭\"\n  ],\n  \"requested_fields\": [\n    \"地铁口\",\n    \"地铁站\"\n  ],\n  \"missing_fields\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "296_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\n    \"周边酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12160_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"24小时热水\",\n    \"接待外宾\"\n  ],\n  \"requested_fields\": [\n    \"酒店名称\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9502_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格：500-600元\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9521_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"故宫餐厅\",\n    \"故宫\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"故宫餐厅\",\n    \"故宫\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8844_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"大栅栏\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9974_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"最低价格\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10853_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"小汤山镇\"],\n  \"requested_fields\": [\"免费景点\", \"游玩1小时 - 2小时\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8814_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"锦江之星(北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"评分\",\n    \"人均餐费\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8529_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"北京市政协会议中心附近\"\n  ],\n  \"requested_fields\": [\n    \"吃饭方便\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"北京市政协会议中心\"\n  ],\n  \"requested_fields\": [\n    \"吃饭方便\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2491_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"清华大学\",\n    \"全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11114_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"绿茶餐厅(光华店)\"\n  ],\n  \"requested_fields\": [\n    \"从绿茶餐厅(光华店)到北京世纪星豪酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10034_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"北京古代建筑博物馆\",\n    \"北京丽晶酒店\"\n  ],\n  \"requested_fields\": [\n    \"车牌\",\n    \"车型\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11241_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"减河五彩园\",\n    \"黑天鹅艺术蛋糕(亮马桥官舍店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "262_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"20-50元\", \"4小时\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3294_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"wifi\", \"公共区域\"],\n  \"requested_fields\": [\"wifi\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_wifi_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7917_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"宋庆龄故居\"],\n  \"requested_fields\": [\"能玩多久\", \"周边还有其他景点吗？\"],\n  \"missing_fields\": [\"宋庆龄故居的具体开放时间\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "132_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分 >= 4\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12187_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"到全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "253_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"北京空港远航国际酒店\"\n  ],\n  \"requested_fields\": [\n    \"出发地附近地铁站和目的地附近地铁站\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6613_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"出发地\", \"目的地\"],\n  \"requested_fields\": [\"营业时间\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2524_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"营业时间\", \"罗斯福店\"],\n  \"requested_fields\": [\"营业时间\"],\n  \"missing_fields\": [\"江边城外\"],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5331_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"景点附近\", \"评分 >= 4分\"],\n  \"requested_fields\": [\"评分\", \"叫醒服务\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8017_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"地址\"],\n  \"requested_fields\": [\"地址\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1791_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"从北京全聚德(双井店)到中国古动物馆\"\n  ],\n  \"requested_fields\": [\n    \"去北京全聚德(双井店)到中国古动物馆\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"从北京全聚德(双井店)到中国古动物馆\"\n  ],\n  \"requested_fields\": [\n    \"去北京全聚德(双井店)到中国古动物馆\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11339_24",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分\"\n  ],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9974_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京鹏润国际大酒店到全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京鹏润国际大酒店到全聚德烤鸭店(清华园店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9324_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格1000元以上\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2108_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"雅悦酒店(北京西直门店)\"],\n  \"requested_fields\": [\"周边有哪些景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10184_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发站\",\n    \"目的地地铁站\"\n  ],\n  \"requested_fields\": [\n    \"出发站\",\n    \"目的地地铁站\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10548_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"藕片\", \"用餐\"],\n  \"requested_fields\": [\"推荐一家餐馆\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2811_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"南新仓店\"\n  ],\n  \"requested_fields\": [\n    \"推荐菜\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9547_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"评分 >= 4.5分\"\n  ],\n  \"requested_fields\": [\n    \"免费\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4666_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"5分\"\n  ],\n  \"requested_fields\": [\n    \"评分\",\n    \"价格\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"5分\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11245_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"红砖美术馆\"\n  ],\n  \"requested_fields\": [\n    \"坐地铁\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10790_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"老舍茶馆\",\n    \"那兰酒楼（潘家园店）\"\n  ],\n  \"requested_fields\": [\n    \"地铁站\"\n  ],\n  \"missing_fields\": [\n    \"距离\"\n  ],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在50-100元\"\n  ],\n  \"requested_fields\": [\n    \"餐厅名称\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"人均消费在50-100元\"\n  ],\n  \"requested_fields\": [\n    \"餐厅名称\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7882_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分: 4.5分以上\", \"票价: 100-150元\", \"游玩时长: 2小时 - 4小时\"],\n  \"requested_fields\": [\"评分\", \"票价\", \"游玩时长\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6867_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"青年餐厅\"\n  ],\n  \"requested_fields\": [\n    \"推荐菜\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10987_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分\"\n  ],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8529_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"外婆家(万达店)\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"外婆家(万达店)\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11114_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从绿茶餐厅(光华店)到昆明湖\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"从绿茶餐厅(光华店)到昆明湖\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8814_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"锦江之星 (北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"吃饭的地方\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"锦江之星 (北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11802_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"砂锅居（西四店）\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10426_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"故宫\"\n  ],\n  \"requested_fields\": [\n    \"车型的类型\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6440_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"故宫\",\n    \"北京贵都大酒店\"\n  ],\n  \"requested_fields\": [\"车型车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6392_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"欢乐水魔方水上乐园住宿\"\n  ],\n  \"requested_fields\": [\n    \"酒店名称\"\n  ],\n  \"missing_fields\": [\n    \"免费市内电话\",\n    \"中式餐厅\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "77_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"公共区域\", \"部分房间\"],\n  \"requested_fields\": [\"wifi\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10034_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5923_22",
+      "raw_model_output": "```json\n{\n  \"domain\": \"门票\",\n  \"constraints\": [\n    \"150-200元\"\n  ],\n  \"requested_fields\": [\n    \"价格\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_ticket_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10496_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"老舍茶馆到雅悦酒店(北京西直门店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌号\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8418_22",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"大钟寺店\"\n  ],\n  \"requested_fields\": [\n    \"周边\"\n  ],\n  \"missing_fields\": []\n}\n```\nnext_action: query_hotel_db",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12207_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9219_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\n    \"地址\"\n  ],\n  \"missing_fields\": [\n    \"附近\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8256_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京首都机场国际酒店到天安门广场\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"从北京首都机场国际酒店到天安门广场\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11802_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"酒店\",\n    \"北京前门大栅栏店\"\n  ],\n  \"requested_fields\": [\n    \"地址\",\n    \"周边\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"酒店\",\n    \"北京前门大栅栏店\"\n  ],\n  \"requested_fields\": [\n    \"地址\",\n    \"周边\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2467_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从北京世纪金源香山商旅酒店到宋庆龄故居\"\n  ],\n  \"requested_fields\": [\n    \"出租车车型\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11754_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"爨底下\",\n    \"郭靖烤全羊\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌号\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11513_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"免费\", \"1小时左右\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8782_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分4分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1547_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分\"\n  ],\n  \"requested_fields\": [\"评分\", \"餐厅\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8408_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"前门大街\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12047_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"王胖子驴肉烧（鼓楼店）\"\n  ],\n  \"requested_fields\": [\"附近的地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9649_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"1小时\", \"100-150元\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"票价\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8197_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"拌萝卜皮\"],\n  \"requested_fields\": [\"菜系\", \"菜品\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9552_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"雁栖湖\"\n  ],\n  \"requested_fields\": [\n    \"票价\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11960_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"免费\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10184_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"杜莎夫人蜡像馆\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "125_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"篱苑\"\n  ],\n  \"requested_fields\": [\n    \"餐馆\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8007_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"京泰龙国际大酒店附近\"\n  ],\n  \"requested_fields\": [\n    \"吃饭\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"京泰龙国际大酒店\"\n  ],\n  \"requested_fields\": [\n    \"吃饭\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3294_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"西单店\"\n  ],\n  \"requested_fields\": [\n    \"推荐菜\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7951_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"野生动物园\", \"时间\"],\n  \"requested_fields\": [\"时间\", \"美食\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "386_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"北京\"\n  ],\n  \"requested_fields\": [\"地址\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10113_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"北京丽景湾国际酒店\",\n    \"蓝海钟鼎楼食府(鲁谷店)\"\n  ],\n  \"requested_fields\": [\"出租车车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9756_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"叫醒服务\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"周边\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3472_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"京泰龙国际大酒店\",\n    \"北京杜莎夫人蜡像馆\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌信息\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10540_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"从香喷喷酱骨头乘坐\",\n    \"到毛主席纪念堂\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12323_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"Berry Beans\", \"明城墙遗址公园\"],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11026_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"出发地: 北京贵都大酒店\",\n    \"目的地: 金鼎轩·南北菜(地坛店)\"\n  ],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6091_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分: 4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "133_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分 >= 4\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10267_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"雅悦酒店（北京西直门店）\"\n  ],\n  \"requested_fields\": [\n    \"周边景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9985_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"九十九顶毡房周边的\"\n  ],\n  \"requested_fields\": [\n    \"酒店住宿\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"九十九顶毡房周边的\"\n  ],\n  \"requested_fields\": [\n    \"酒店住宿\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12400_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"人均50-100元\"],\n  \"requested_fields\": [\"评分\", \"餐馆\"],\n  \"missing_fields\": [\"人均\"],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1820_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"从烤肉宛饭庄到北京远通维景国际大酒店\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7805_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"价格在100-200元\",\n    \"豪华型\"\n  ],\n  \"requested_fields\": [\n    \"酒店名称\"\n  ],\n  \"missing_fields\": [\n    \"房间类型\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "129_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"暖气\"],\n  \"requested_fields\": [\"酒店设施是否提供暖气\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9012_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"天伦王朝酒店到九九嘉(迎宾路店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4025_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"附近的\", \"评分4.5分以上\"],\n  \"requested_fields\": [\"门票\"],\n  \"missing_fields\": [\"评分4.5分以上\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "91_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从小吊梨汤(畅春园店)\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10049_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"维也纳国际酒店(北京广安门店)\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1814_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"杜莎夫人蜡像馆 -> 百萨屋比萨(亦庄店)\"],\n  \"requested_fields\": [\"起点\", \"终点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10092_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店住宿\",\n  \"constraints\": [\n    \"宽带上网\"\n  ],\n  \"requested_fields\": [\n    \"酒店住宿\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12278_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"经济型\", \"4.5分以上\"],\n  \"requested_fields\": [\"酒店\"],\n  \"missing_fields\": [\"距离\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10916_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"评分 >= 4.5\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4768_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"7天连锁酒店(北京苹果园地铁站金顶北街店)到国子监\"],\n  \"requested_fields\": [\"乘坐方式\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10202_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"经济型\",\n    \"SPA\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"经济型\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9391_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"游玩结束后\"\n  ],\n  \"requested_fields\": [\n    \"餐馆\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10083_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"北京空港远航国际酒店\",\n    \"世界公园美洲区\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4635_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"前门大街\"\n  ],\n  \"requested_fields\": [\n    \"票价\"\n  ],\n  \"missing_fields\": [\n    \"周边\"\n  ],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2424_20",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"北京空港远航国际酒店\"\n  ],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9552_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12327_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"评分5分\",\n    \"门票价格150-200元\"\n  ],\n  \"requested_fields\": [\n    \"评分5分\",\n    \"门票价格\"\n  ],\n  \"missing_fields\": [\n    \"游玩时间\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12141_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"鑫亮亮海鲜酒楼的周边景点\"],\n  \"requested_fields\": [\"评分\", \"票价\"],\n  \"missing_fields\": [\"免费\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7985_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"蝎王府羊蝎子\"],\n  \"requested_fields\": [\"地铁站发我下\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10875_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"从北京古代建筑博物馆到都一处烧麦馆\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"从北京古代建筑博物馆到都一处烧麦馆\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "200_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"早餐\"],\n  \"requested_fields\": [\"早餐服务\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "5338_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"香山公园\"\n  ],\n  \"requested_fields\": [\n    \"推荐\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3652_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"免费\", \"评分4.5分以上\"],\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7501_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"恭王府附近\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11315_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"古陶文明博物馆\",\n    \"北京天伦王朝酒店\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌号\"],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "3144_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"无烟\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9893_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"4.5分以上, 票价50-100元, 1小时-2小时\",\n  \"requested_fields\": [\"推荐地点\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8678_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\"评分：5分\", \"游玩时间：1小时左右\"],\n  \"requested_fields\": [\"推荐的景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12160_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"光华店\",\n    \"北京千禧大酒店\"\n  ],\n  \"requested_fields\": [\"车型\", \"车牌\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12037_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"北京空港远航国际酒店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12114_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"可游玩1小时\"\n  ],\n  \"requested_fields\": [\n    \"景点\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9943_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"如家快捷酒店(北京小西天店)\"\n  ],\n  \"requested_fields\": [\n    \"出租车\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2811_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"舒适型\"\n  ],\n  \"requested_fields\": [\n    \"最低价格\",\n    \"舒适型\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"舒适型\"\n  ],\n  \"requested_fields\": [\n    \"最低价格\",\n    \"舒适型\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10489_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"推荐一家\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7501_10",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分\", \"胡同店\", \"小菊儿胡同店\", \"王府井店\", \"护国寺总店\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10606_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"坡峰岭\",\n    \"胡大饭馆(簋街总店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7246_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"接站服务\",\n    \"国际长途电话\"\n  ],\n  \"requested_fields\": [\n    \"酒店名称\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"接站服务\",\n    \"国际长途电话\"\n  ],\n  \"requested_fields\": [\n    \"酒店名称\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6042_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"国家大剧院到中安之家连锁(北京中安宾馆)\"],\n  \"requested_fields\": [\"怎么坐地铁？\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7198_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"5分\"],\n  \"requested_fields\": [],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "10092_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分: 4分以上\", \"人均消费: 1000元以上\"],\n  \"requested_fields\": [\"评分\", \"人均消费\"],\n  \"missing_fields\": null,\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "290_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格: 400-500元\",\n    \"评分: 4分以上\"\n  ],\n  \"requested_fields\": [\n    \"推荐酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "386_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"出发地：北京鹏润国际大酒店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9565_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分 >= 4.5\"\n  ],\n  \"requested_fields\": [\n    \"评分\",\n    \"人均价\"\n  ],\n  \"missing_fields\": [\n    \"出发地\",\n    \"目的地\"\n  ],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "105_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\"接待外宾\", \"叫醒服务\", \"第二天早起\"],\n  \"requested_fields\": [\"酒店服务\", \"接待外宾\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "129_4",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"最低价格是300-400元\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11628_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"鲜鱼口\"\n  ],\n  \"requested_fields\": [\n    \"酒店\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "400_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "9921_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"安之家北京东单馆\"],\n  \"requested_fields\": [\"出发地\", \"目的地\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11402_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"家\"\n  ],\n  \"requested_fields\": [\n    \"接机服务\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7951_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"消费在50-100元\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11667_6",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租\",\n  \"constraints\": [\n    \"大葆台西汉墓\",\n    \"海碗居北京菜增光路总店\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "12035_14",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"布丁酒店(北京团结湖店)\"\n  ],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6132_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"评分4分以上\",\n    \"最低价格400-500元\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [\n    \"酒店\"\n  ],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "307_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6613_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"金针菇这道菜\"\n  ],\n  \"requested_fields\": [\n    \"推荐下\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "8017_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"云峰山到新石器烤肉(通州北苑店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"request_taxi\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11488_2",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": \"人均消费100-150元\",\n  \"requested_fields\": [\"人均消费\"],\n  \"missing_fields\": [\"目的地\"],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "307_8",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"贵都大酒店\"\n  ],\n  \"requested_fields\": [\n    \"从北京贵都大酒店到故宫\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"贵都大酒店\"\n  ],\n  \"requested_fields\": [\n    \"从北京贵都大酒店到故宫\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "1814_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"100-150元, 4分以上\",\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [\"4分以上\"],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7388_24",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\n    \"评分4.5分以上\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "133_18",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\n    \"定都阁\"\n  ],\n  \"requested_fields\": [\n    \"阁\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "4354_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"出租车\",\n  \"constraints\": [\n    \"锦江之星 (北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```\n```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": [\n    \"锦江之星 (北京奥体中心店)\"\n  ],\n  \"requested_fields\": [\n    \"车型\",\n    \"车牌\"\n  ],\n  \"missing_fields\": []\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "11339_26",
+      "raw_model_output": "```json\n{\n  \"domain\": \"酒店\",\n  \"constraints\": [\n    \"4.5\"\n  ],\n  \"requested_fields\": [\n    \"评分\"\n  ],\n  \"missing_fields\": [],\n  \"next_action\": \"query_hotel_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "2175_12",
+      "raw_model_output": "```json\n{\n  \"domain\": \"地铁\",\n  \"constraints\": [\"世纪金源大饭店\", \"满恒记火锅\"],\n  \"requested_fields\": [\"地铁站\"],\n  \"missing_fields\": [\"世纪金源大饭店的地铁站\"],\n  \"next_action\": \"query_metro_route\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "6997_0",
+      "raw_model_output": "```json\n{\n  \"domain\": \"景点\",\n  \"constraints\": \"票价200元，时长1-2小时，4.5分以上\",\n  \"requested_fields\": [\"景点\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_attraction_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    },
+    {
+      "sample_id": "7198_16",
+      "raw_model_output": "```json\n{\n  \"domain\": \"餐馆\",\n  \"constraints\": [\"评分\"],\n  \"requested_fields\": [\"评分\"],\n  \"missing_fields\": [],\n  \"next_action\": \"query_restaurant_db\"\n}\n```",
+      "json_valid": false,
+      "tool_correct": false,
+      "error": "constraints must be an object"
+    }
+  ]
+}

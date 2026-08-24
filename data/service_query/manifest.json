@@ -1,0 +1,37 @@
+{
+  "source": "CrossWOZ (THU-CoAI, TACL 2020, Apache-2.0) -- real human-annotated Chinese task-oriented dialogue",
+  "source_url": "https://github.com/thu-coai/CrossWOZ",
+  "seed": 42,
+  "splits": {
+    "train": 300,
+    "validation": 291,
+    "test": 300
+  },
+  "next_action_distribution": {
+    "train": {
+      "query_restaurant_db": 50,
+      "ask_clarification": 50,
+      "query_hotel_db": 50,
+      "query_metro_route": 50,
+      "query_attraction_db": 50,
+      "request_taxi": 50
+    },
+    "validation": {
+      "ask_clarification": 41,
+      "query_attraction_db": 50,
+      "query_metro_route": 50,
+      "query_restaurant_db": 50,
+      "request_taxi": 50,
+      "query_hotel_db": 50
+    },
+    "test": {
+      "query_hotel_db": 50,
+      "request_taxi": 50,
+      "ask_clarification": 50,
+      "query_restaurant_db": 50,
+      "query_attraction_db": 50,
+      "query_metro_route": 50
+    }
+  },
+  "notice": "input_text and the extracted domain/constraints/requested_fields come from CrossWOZ's own human annotation. next_action is this project's own routing design layered on top -- CrossWOZ does not label which backend action a system should take."
+}

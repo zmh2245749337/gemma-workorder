@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-08-11T12:51:55.435263+00:00",
+  "python": "3.12.13",
+  "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+  "torch": "2.11.0+cu128",
+  "transformers": "5.13.1",
+  "cuda_available": true,
+  "cuda_version": "12.8",
+  "gpu": "Tesla T4",
+  "model_id": "google/gemma-3-1b-it",
+  "precision": "fp16",
+  "prompt": "请用三句话解释什么是KV Cache。",
+  "parameters": {
+    "model_id": "google/gemma-3-1b-it",
+    "precision": "fp16",
+    "prompt": "请用三句话解释什么是KV Cache。",
+    "max_new_tokens": 48,
+    "temperature": 0.8,
+    "top_k": 40,
+    "top_p": 0.9,
+    "seed": 42,
+    "greedy": true,
+    "no_cache": false,
+    "check_hf_parity": true,
+    "output": "reports/manual_decode.json"
+  },
+  "manual_text": "KV Cache（Key-Value Cache）是一种缓存技术，它存储关键数据（Key）和对应的值（Value）。当客户端请求数据时，KV Cache 会快速查找并提供该数据，避免了从数据库或其他数据源",
+  "generated_tokens": 48,
+  "ttft_ms": 766.7872070001067,
+  "total_tps": 15.291572659001996,
+  "hf_greedy_parity": true
+}

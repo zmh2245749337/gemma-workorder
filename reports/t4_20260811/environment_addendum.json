@@ -1,0 +1,6 @@
+{
+  "source": "Captured in the same Google Colab runtime immediately after the benchmark and quality runs",
+  "accelerate": "1.14.0",
+  "bitsandbytes": "0.50.0",
+  "note": "Future runs record these versions automatically through environment_record()."
+}

@@ -1,0 +1,62 @@
+{
+  "parser": "phase_a_rule_based_reference",
+  "structured_fields": {
+    "asset_name": "A区3号风机",
+    "asset_id": null,
+    "asset_type": "风机",
+    "fault_code": "E07",
+    "symptom": "A区3号风机今天上午频繁停机，面板显示E07，重启后运行十分钟再次停止，暂时没有更换零件。",
+    "occurred_at": "今天上午",
+    "actions_taken": [
+      "重启"
+    ],
+    "parts_replaced": [],
+    "missing_fields": [],
+    "next_action": "query_fault_code"
+  },
+  "tool_call": {
+    "name": "query_fault_code",
+    "arguments": {
+      "code": "E07",
+      "asset_type": "风机"
+    }
+  },
+  "tool_result": {
+    "tool": "query_fault_code",
+    "status": "ok",
+    "record": {
+      "code": "E07",
+      "asset_type": "风机",
+      "meaning": "过载保护触发",
+      "manual_ref": "FAN-X200 手册 4.2"
+    }
+  },
+  "draft": {
+    "status": "draft_requires_human_confirmation",
+    "work_order": {
+      "asset_name": "A区3号风机",
+      "asset_id": null,
+      "asset_type": "风机",
+      "fault_code": "E07",
+      "symptom": "A区3号风机今天上午频繁停机，面板显示E07，重启后运行十分钟再次停止，暂时没有更换零件。",
+      "occurred_at": "今天上午",
+      "actions_taken": [
+        "重启"
+      ],
+      "parts_replaced": [],
+      "missing_fields": [],
+      "next_action": "query_fault_code"
+    },
+    "trusted_reference": {
+      "tool": "query_fault_code",
+      "status": "ok",
+      "record": {
+        "code": "E07",
+        "asset_type": "风机",
+        "meaning": "过载保护触发",
+        "manual_ref": "FAN-X200 手册 4.2"
+      }
+    },
+    "safety_note": "故障码含义来自本地参考表；该草稿不构成维修决策。"
+  }
+}
