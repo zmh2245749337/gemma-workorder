@@ -61,27 +61,14 @@ FFN 有 gate、up、down 三个线性层。gate 分支经过近似 tanh 的 GELU
 2. **行为测试**：小模型上比较完整前向与 `prefill + 单 token decode`，验证 KV Cache 不改变结果。
 3. **官方权重对齐**：把 `google/gemma-3-1b-it` 的权重复制到独立实现，比较第 0、5、25 层和最终 logits 的最大误差、平均误差、余弦相似度与 top-1 token。
 
-Colab 命令：
-
-```bash
-python scripts/run_core_alignment.py \
-  --precision fp16 \
-  --layers 0 5 25 \
-  --output reports/core_alignment.json
-```
-
-第 0、25 层覆盖局部注意力，第 5 层覆盖全局注意力。只有实际生成的 `reports/core_alignment.json` 才是可写入简历的数值证据。
-
-### 已验证结果
-
-2026-08-12 在 Tesla T4、FP16 环境完成一次官方权重对齐。第 0、5、25 层以及最后一个 token 的 logits 最大/平均绝对误差均为 `0.0`，官方实现与独立实现的 top-1 token ID 均为 `57137`。原始记录位于 [`reports/core_alignment_20260812/core_alignment.json`](../reports/core_alignment_20260812/core_alignment.json)。该结果证明本次记录的输入和环境下两条前向链路一致，不代表未经测试的所有输入与环境。
+第 0、25 层可覆盖局部注意力，第 5 层可覆盖全局注意力。当前仓库只保留可读实现和结构/行为测试，早期对齐脚本与硬件报告已留在 Git 历史中，不再出现在当前 Agent 求职主线里，也不作为当前模型效果指标。
 
 ## 4. 面试时必须能讲清的边界
 
 - 这是**推理内核复现与权重对齐**，不是从零预训练模型。
 - 官方权重来自 `google/gemma-3-1b-it`，自己实现的是前向计算、Mask、位置编码和 Cache 数据流。
 - eager PyTorch 版本优先可读性和可验证性，不会比 FlashAttention/编译内核更快。
-- 旧的 20 题评测只是部署配置的回归检查，不代表通用模型能力；项目主线已经改为结构复现和推理优化。
+- 这部分只是理解模型结构的附录；项目主线是上下文工具决策后训练与安全执行。
 
 ## 5. 官方资料
 

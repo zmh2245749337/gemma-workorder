@@ -1,0 +1,56 @@
+{
+  "source": "CrossWOZ official train/val/test splits",
+  "seed": 42,
+  "max_history_turns": 6,
+  "raw_turn_examples": {
+    "train": 42346,
+    "validation": 4229,
+    "test": 4238
+  },
+  "sampled_examples": {
+    "train": 1968,
+    "validation": 440,
+    "test": 440
+  },
+  "challenge_examples": 80,
+  "controlled_missing_slot_examples": {
+    "train": 160,
+    "validation": 40,
+    "test": 40
+  },
+  "route_distribution": {
+    "train": {
+      "query_restaurant_db": 300,
+      "no_tool": 300,
+      "query_metro_route": 300,
+      "ask_user": 168,
+      "request_taxi": 300,
+      "query_hotel_db": 300,
+      "query_attraction_db": 300
+    },
+    "validation": {
+      "query_restaurant_db": 110,
+      "query_attraction_db": 115,
+      "ask_user": 40,
+      "no_tool": 52,
+      "query_hotel_db": 105,
+      "query_metro_route": 8,
+      "request_taxi": 10
+    },
+    "test": {
+      "query_hotel_db": 98,
+      "query_attraction_db": 122,
+      "query_restaurant_db": 122,
+      "ask_user": 40,
+      "no_tool": 48,
+      "query_metro_route": 8,
+      "request_taxi": 2
+    }
+  },
+  "label_provenance": {
+    "belief_state": "CrossWOZ user_state entries whose mentioned flag is true",
+    "tool_arguments": "following system turn sys_state_init",
+    "ask_user": "natural missing arguments plus explicitly marked controlled required-slot ablations built from split-local endpoint values",
+    "tool_name": "deterministic CrossWOZ domain-to-local-tool mapping"
+  }
+}

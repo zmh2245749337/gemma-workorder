@@ -1,4 +1,4 @@
-"""Utilities for reproducible Gemma inference experiments."""
+"""Gemma context-aware tool-use training and guarded execution utilities."""
 
 from .decoding import GenerationResult, manual_generate
 from .gemma3_core import (
@@ -9,8 +9,7 @@ from .gemma3_core import (
     HybridKVCache,
 )
 from .modeling import DEFAULT_MODEL_ID, ModelBundle, load_model_bundle
-from .workorder import WorkOrderFields, initialise_demo_database, run_phase_a
-from .workorder_data import workorder_prompt
+from .tool_use import AgentDecision, ToolCall, apply_policy, validate_decision
 
 __all__ = [
     "DEFAULT_MODEL_ID",
@@ -23,8 +22,8 @@ __all__ = [
     "ModelBundle",
     "load_model_bundle",
     "manual_generate",
-    "WorkOrderFields",
-    "initialise_demo_database",
-    "run_phase_a",
-    "workorder_prompt",
+    "AgentDecision",
+    "ToolCall",
+    "apply_policy",
+    "validate_decision",
 ]
