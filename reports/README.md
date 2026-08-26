@@ -1,19 +1,27 @@
-# 实验结果目录
+# 模型评测结果
 
-运行脚本后会在这里产生 CSV、JSON 或 JSONL。临时结果默认被 `.gitignore` 忽略，防止不同硬件的实验相互覆盖。
+运行 `scripts/evaluate_tool_use.py` 后，Base 与 QLoRA 的完整 JSON 报告会写到这里，但默认不提交，避免仓库被逐样本原始输出撑大。
 
-当前公开证据分为三组：
+三份评测完成后运行：
 
-- [`workorder_experiment_20260813/`](workorder_experiment_20260813/)：QLoRA 工单结构化、Base-vs-QLoRA 指标和合并权重白盒复核；
-- [`core_alignment_20260812/`](core_alignment_20260812/)：官方 Gemma 与独立 Decoder 的原始数值对齐记录；
-- [`t4_20260811/`](t4_20260811/)：KV Cache、FP16/4bit、吞吐和显存实验的原始数据、图表与报告。
+```powershell
+.\run_local.ps1 -Mode analyze
+```
 
-新增公开结果时，只提交经过复核的报告，并至少包含：
+脚本会重新关联固定数据集，计算参数 Slot 指标、决策混淆矩阵和错误分类，并生成可提交的 [`EXPERIMENT_REPORT.md`](EXPERIMENT_REPORT.md)。
 
-- Colab GPU 型号和运行时间；
-- PyTorch、Transformers、bitsandbytes 版本；
-- 模型 ID、精度、提示词 token 数和生成 token 数；
-- 预热次数、重复次数、随机种子；
-- TTFT、decode TPS、端到端 TPS、峰值显存；
-- 固定题集通过率与失败样例；
-- 结论的适用范围和限制。
+正式更新 README 或简历前，请至少核对：
+
+- 两次评测使用同一模型版本、测试集、Prompt、精度和贪心解码设置；
+- 报告中的 Adapter 路径正确；
+- 测试集共 440 条，其中 40 条为 manifest 明示的受控缺参样本；
+- 随机抽查原始输出，确认指标提升不是解析器放宽造成的；
+- 记录 GPU、依赖版本、训练参数和失败案例。
+
+建议文件名：
+
+```text
+tool_use_base_4bit.json
+tool_use_qlora_4bit.json
+tool_use_qlora_challenge_4bit.json
+```
