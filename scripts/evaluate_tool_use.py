@@ -13,7 +13,7 @@ if SOURCE_ROOT in sys.path:
     sys.path.remove(SOURCE_ROOT)
 sys.path.insert(0, SOURCE_ROOT)
 
-from gemma_eval.tool_use import extract_json, strict_json_loads, validate_decision
+from gemma_eval.contracts import extract_json, strict_json_loads, validate_decision
 from gemma_eval.tool_use_data import (
     aggregate_metrics,
     compare_decisions,

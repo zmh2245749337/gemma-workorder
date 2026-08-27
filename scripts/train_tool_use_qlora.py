@@ -17,11 +17,12 @@ if SOURCE_ROOT in sys.path:
 sys.path.insert(0, SOURCE_ROOT)
 
 from gemma_eval.env import resolve_hf_token
-from gemma_eval.tool_use_data import canonical_json, load_jsonl, tool_use_prompt
+from gemma_eval.tool_use_data import load_jsonl
+from gemma_eval.traces import render_sft_pair
 
 
 def encode_example(tokenizer, row: dict, max_length: int) -> dict[str, list[int]]:
-    prompt = tool_use_prompt(row["history"], row["current_user"], row["previous_state"])
+    prompt, answer = render_sft_pair(row)
     prompt_ids = tokenizer.apply_chat_template(
         [{"role": "user", "content": prompt}], tokenize=True, add_generation_prompt=True
     )
@@ -29,7 +30,7 @@ def encode_example(tokenizer, row: dict, max_length: int) -> dict[str, list[int]
         prompt_ids = prompt_ids["input_ids"]
     if prompt_ids and isinstance(prompt_ids[0], list):
         prompt_ids = prompt_ids[0]
-    answer_ids = tokenizer(canonical_json(row["output"]), add_special_tokens=False)["input_ids"]
+    answer_ids = tokenizer(answer, add_special_tokens=False)["input_ids"]
     eos = [tokenizer.eos_token_id] if tokenizer.eos_token_id is not None else []
     all_ids = prompt_ids + answer_ids + eos
     labels = [-100] * len(prompt_ids) + answer_ids + eos
@@ -164,7 +165,8 @@ def main() -> None:
     model.save_pretrained(args.output_dir)
     tokenizer.save_pretrained(args.output_dir)
     metadata = {
-        "scope": "CrossWOZ multi-turn state tracking and structured tool decisions",
+        "scope": "Agent Trace SFT for multi-turn state tracking and guarded tool decisions",
+        "trace_schema_version": "1.0",
         "base_model": args.model_id,
         "train_samples": len(train_rows),
         "validation_samples": len(validation_rows),

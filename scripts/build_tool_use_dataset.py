@@ -24,10 +24,12 @@ if SOURCE_ROOT in sys.path:
     sys.path.remove(SOURCE_ROOT)
 sys.path.insert(0, SOURCE_ROOT)
 
-from gemma_eval.tool_use import TOOL_REGISTRY, validate_decision
+from gemma_eval.contracts import validate_decision
+from gemma_eval.tool_registry import DEFAULT_TOOL_REGISTRY
 
 
-QUERY_TOOL = {spec.domain: spec.name for spec in TOOL_REGISTRY.values()}
+TOOL_REGISTRY = DEFAULT_TOOL_REGISTRY.as_dict()
+QUERY_TOOL = {spec.domain: spec.name for spec in DEFAULT_TOOL_REGISTRY.values()}
 PRONOUN_MARKERS = ("这个", "那个", "这家", "那里", "该景点", "该酒店", "该餐馆", "它")
 CORRECTION_MARKERS = ("不要", "改成", "换成", "不是", "还是", "重新")
 

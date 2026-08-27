@@ -6,7 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from .tool_use import TOOL_REGISTRY, AgentDecision, validate_decision
+from .contracts import AgentDecision, validate_decision
+from .tool_registry import DEFAULT_TOOL_REGISTRY
 
 
 SYSTEM_PROMPT = """你是任务型Agent的工具决策模块。请根据完整对话历史维护用户当前状态，
@@ -23,10 +24,7 @@ SYSTEM_PROMPT = """你是任务型Agent的工具决策模块。请根据完整�
 
 def tool_registry_prompt() -> str:
     rows = []
-    for spec in TOOL_REGISTRY.values():
-        required = "、".join(spec.required_arguments) if spec.required_arguments else "无固定必填字段"
-        rows.append(f"- {spec.name}: 领域={spec.domain}; 必填参数={required}")
-    return "\n".join(rows)
+    return "\n".join(DEFAULT_TOOL_REGISTRY.prompt_lines())
 
 
 def tool_use_prompt(
@@ -118,11 +116,11 @@ def compare_decisions(prediction: AgentDecision, target_payload: dict[str, Any])
     target_arguments = _argument_items(target.tool_call.arguments) if target.tool_call else set()
     matched_arguments = predicted_arguments & target_arguments
     required_argument_case = bool(
-        target.tool_call and TOOL_REGISTRY[target.tool_call.name].required_arguments
+        target.tool_call and DEFAULT_TOOL_REGISTRY[target.tool_call.name].required_arguments
     )
     required_arguments_correct = False
     if required_argument_case and target.tool_call and prediction.tool_call:
-        required = TOOL_REGISTRY[target.tool_call.name].required_arguments
+        required = DEFAULT_TOOL_REGISTRY[target.tool_call.name].required_arguments
         required_arguments_correct = (
             prediction.tool_call.name == target.tool_call.name
             and all(

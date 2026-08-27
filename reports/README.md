@@ -6,9 +6,10 @@
 
 ```powershell
 .\run_local.ps1 -Mode analyze
+.\run_local.ps1 -Mode benchmark
 ```
 
-脚本会重新关联固定数据集，计算参数 Slot 指标、决策混淆矩阵和错误分类，并生成可提交的 [`EXPERIMENT_REPORT.md`](EXPERIMENT_REPORT.md)。
+脚本会重新关联固定数据集：`analyze` 生成总体对照、决策混淆矩阵和错误分类；`benchmark` 按调用、追问、拒调、多轮、长状态和 challenge 标签生成 [`BENCHMARK_REPORT.md`](BENCHMARK_REPORT.md)。两份 Markdown 都可提交，逐样本 JSON 仍留在本地。
 
 正式更新 README 或简历前，请至少核对：
 
