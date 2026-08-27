@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("check", "smoke", "train", "eval-base", "eval-qlora", "eval-challenge", "analyze", "demo")]
+    [ValidateSet("check", "trace", "smoke", "train", "eval-base", "eval-qlora", "eval-challenge", "analyze", "benchmark", "demo")]
     [string]$Mode = "check"
 )
 
@@ -28,6 +28,13 @@ switch ($Mode) {
             "import torch; print('Python environment ready'); print('torch =', torch.__version__); print('CUDA =', torch.cuda.is_available()); print('GPU =', torch.cuda.get_device_name(0) if torch.cuda.is_available() else None)"
         )
         Invoke-ProjectPython -Arguments @("-m", "pytest", "-q")
+    }
+    "trace" {
+        Invoke-ProjectPython -Arguments @(
+            "scripts/export_agent_traces.py",
+            "--input", "data/tool_use/train.jsonl",
+            "--output", "artifacts/traces/train.jsonl"
+        )
     }
     "smoke" {
         Invoke-ProjectPython -Arguments @(
@@ -77,6 +84,9 @@ switch ($Mode) {
     }
     "analyze" {
         Invoke-ProjectPython -Arguments @("scripts/analyze_tool_use_results.py")
+    }
+    "benchmark" {
+        Invoke-ProjectPython -Arguments @("scripts/run_agent_benchmark.py")
     }
     "demo" {
         if (-not (Test-Path -LiteralPath "artifacts/tool_use_qlora_adapter")) {

@@ -1,7 +1,7 @@
 [project]
 name = "gemma-tool-use"
-version = "0.4.0"
-description = "Context-aware tool-use post-training and guarded local execution for Gemma 3-1B."
+version = "0.5.0"
+description = "Agent tool-use post-training, guarded runtime and scenario evaluation for Gemma 3-1B."
 requires-python = ">=3.10"
 dependencies = [
   "torch>=2.4",

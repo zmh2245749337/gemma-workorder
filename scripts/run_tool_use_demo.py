@@ -13,7 +13,9 @@ if SOURCE_ROOT in sys.path:
     sys.path.remove(SOURCE_ROOT)
 sys.path.insert(0, SOURCE_ROOT)
 
-from gemma_eval.tool_use import extract_json, initialise_demo_database, run_decision
+from gemma_eval.contracts import extract_json
+from gemma_eval.local_tools import initialise_demo_database
+from gemma_eval.runtime import AgentRuntime
 from gemma_eval.tool_use_data import load_jsonl, tool_use_prompt
 
 
@@ -55,7 +57,7 @@ def main() -> None:
     raw = bundle.tokenizer.decode(generated[0, prompt_length:], skip_special_tokens=True).strip()
     parsed = extract_json(raw)
     initialise_demo_database(args.db, Path("data/tool_use/reference"))
-    outcome = run_decision(parsed, args.db)
+    outcome = AgentRuntime(args.db).run_payload(parsed)
     print(
         json.dumps(
             {

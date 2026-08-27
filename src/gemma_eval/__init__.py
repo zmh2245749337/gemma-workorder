@@ -9,7 +9,10 @@ from .gemma3_core import (
     HybridKVCache,
 )
 from .modeling import DEFAULT_MODEL_ID, ModelBundle, load_model_bundle
-from .tool_use import AgentDecision, ToolCall, apply_policy, validate_decision
+from .contracts import AgentDecision, ToolCall, validate_decision
+from .policy import apply_policy
+from .runtime import AgentRuntime
+from .tool_registry import DEFAULT_TOOL_REGISTRY, ToolRegistry
 
 __all__ = [
     "DEFAULT_MODEL_ID",
@@ -23,7 +26,10 @@ __all__ = [
     "load_model_bundle",
     "manual_generate",
     "AgentDecision",
+    "AgentRuntime",
+    "DEFAULT_TOOL_REGISTRY",
     "ToolCall",
+    "ToolRegistry",
     "apply_policy",
     "validate_decision",
 ]

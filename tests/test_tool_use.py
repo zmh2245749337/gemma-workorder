@@ -12,6 +12,9 @@ from gemma_eval.tool_use import (
     validate_decision,
 )
 from gemma_eval.tool_use_data import aggregate_metrics, compare_decisions, tool_use_prompt
+from gemma_eval.benchmark import benchmark_tags, slice_metrics
+from gemma_eval.tool_registry import DEFAULT_TOOL_REGISTRY
+from gemma_eval.traces import row_to_agent_trace
 
 
 def payload(decision="no_tool", tool_call=None, missing_slots=None):
@@ -56,6 +59,13 @@ def test_schema_rejects_unknown_tool_and_empty_clarification():
         validate_decision(payload("call_tool", {"name": "run_shell", "arguments": {}}))
     with pytest.raises(ValueError, match="requires at least one"):
         validate_decision(payload("ask_user"))
+    with pytest.raises(ValueError, match="unknown arguments"):
+        validate_decision(
+            payload(
+                "call_tool",
+                {"name": "query_hotel_db", "arguments": {"sql": "DROP TABLE hotels"}},
+            )
+        )
 
 
 def test_missing_slot_routes_to_clarification():
@@ -185,3 +195,56 @@ def test_required_argument_accuracy_is_reported_separately():
     }
     metrics = aggregate_metrics([record])
     assert metrics["required_argument_accuracy"] == 1.0
+
+
+def test_registry_exports_function_schemas_and_risk_is_code_owned():
+    schemas = DEFAULT_TOOL_REGISTRY.to_function_schemas()
+    taxi = next(item for item in schemas if item["function"]["name"] == "request_taxi")
+    assert taxi["function"]["parameters"]["required"] == ["出发地", "目的地"]
+    assert DEFAULT_TOOL_REGISTRY["request_taxi"].risk == "side_effect"
+    assert "risk" not in taxi["function"]["parameters"]["properties"]
+
+
+def test_agent_trace_connects_context_target_and_policy():
+    row = {
+        "sample_id": "trace-1",
+        "history": [{"role": "user", "content": "我从故宫出发"}],
+        "previous_state": [],
+        "current_user": "帮我叫车去颐和园",
+        "output": payload(
+            "call_tool",
+            {
+                "name": "request_taxi",
+                "arguments": {"出发地": "故宫", "目的地": "颐和园"},
+            },
+        ),
+        "source": {"dialog_id": "demo"},
+    }
+    trace = row_to_agent_trace(row)
+    assert trace["schema_version"] == "1.0"
+    assert trace["events"][1]["stage"] == "model_target"
+    assert trace["events"][2]["payload"]["status"] == "pending_confirmation"
+
+
+def test_benchmark_tags_and_slice_metrics():
+    row = {
+        "sample_id": "controlled-1",
+        "history": [],
+        "previous_state": [],
+        "current_user": "我从故宫出发，帮我叫车",
+        "output": payload("ask_user", missing_slots=["目的地"]),
+        "source": {"type": "controlled_required_slot_ablation"},
+    }
+    assert {"ask_user", "missing_argument_controlled"} <= benchmark_tags(row)
+    result = slice_metrics(
+        [
+            {
+                "benchmark_tags": ["all", "ask_user"],
+                "strict_json_valid": True,
+                "schema_valid": True,
+                "target_decision": "ask_user",
+                "decision_correct": True,
+            }
+        ]
+    )
+    assert result["ask_user"]["decision_accuracy"] == 1.0

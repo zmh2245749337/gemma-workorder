@@ -1,61 +1,41 @@
-# Gemma Tool-Use Post-Training
+# Gemma Agent Tool-Use Lab
 
-> 面向任务型 Agent 的 Gemma 3-1B 多轮状态跟踪、工具决策后训练与安全执行实验。
+> 面向任务型 Agent 的小模型工具学习、受控执行与可靠性评测框架。
 
-这个项目只解决一个明确问题：**让 Gemma 3-1B 在多轮中文对话中维护结构化状态，判断应该调用工具、追问缺失信息还是不调用工具，并在代码侧安全执行。**
+本项目研究的不是“再搭一个聊天机器人”，而是 Agent 系统中更难验证的一层：**怎样把通用小模型训练成稳定的工具决策器，并用确定性运行时约束它何时调用、何时追问、何时停止。**
 
-它不是另一个大而全的 Agent 应用。规划、RAG、MCP、多 Agent 协作由主项目承担；本项目聚焦 Agent 内部更靠近模型的一层：数据构建、QLoRA 后训练、结构化评测和工具执行边界。
+项目以 Gemma 3-1B 为基座，完成从多轮 Agent Trace 构造、4bit QLoRA 后训练，到 Tool Registry、Policy Engine、受控 Runtime 和分场景 Eval Harness 的完整闭环。CrossWOZ 只是可复现的数据来源；核心交付物是可迁移的 Tool-Use 后训练与验证方法。
 
-## 一条主线
+## 已完成的闭环
 
 ```text
-最近 6 轮对话 + 上一轮状态 + 工具说明
-                    │
-                    ▼
-              Gemma 3-1B
-                    │
-                    ▼
- belief_state + decision + tool_call + missing_slots
-                    │
-                    ▼
-        Schema 校验 + 工具白名单 + 风险策略
-          │              │               │
-       只读查询        参数不足         打车请求
-       自动执行        继续追问         人工确认
+CrossWOZ 多轮对话
+       │  状态归一化 / 标签溯源 / 缺参消融
+       ▼
+Canonical Agent Trace ───────► 4bit QLoRA SFT
+       │                           │
+       │ history / state / tools   ▼
+       └────────────────────► Gemma 3-1B
+                                   │
+                    belief_state + decision + tool_call
+                                   │
+                     Contract / Registry / Policy
+                        │          │           │
+                    自动执行     继续追问     人工确认
+                                   │
+                   Eval Harness + Error Analysis
 ```
 
-模型负责“理解和建议”，确定性代码负责“校验和授权”：
+这条链路对应四类真实工作：
 
-- `call_tool`：参数完整时提出白名单工具调用；
-- `ask_user`：地铁/打车缺少出发地或目的地时先追问；
-- `no_tool`：致谢、确认等不需要外部能力的轮次不误调工具；
-- 只读工具通过校验后查询本地 SQLite；
-- `request_taxi` 被注册为副作用工具，即使模型选择正确也只能停在人工确认，不会真实派车。
+- **数据工程**：把原始多轮对话转换为带上下文、状态、工具 Schema、目标决策和来源标记的 Agent Trace；
+- **模型后训练**：用 4bit NF4 QLoRA 训练结构化状态维护和 Tool-Use 决策，训练损失只覆盖目标 JSON；
+- **运行时治理**：模型只负责提议，代码负责 Schema、白名单、必填参数、风险分级和执行授权；
+- **可靠性评测**：比较 Base 与 QLoRA，并按调用、追问、拒调、多轮状态、长状态和风险动作切片分析。
 
-## 数据与任务
+## 核心结果
 
-数据来自 [CrossWOZ](https://github.com/thu-coai/CrossWOZ) 官方 train/val/test 划分。构建脚本没有把多轮对话拆成互不相干的单句，而是保留：
-
-- 最近 6 轮对话历史；
-- 上一轮累计 `belief_state`；
-- 当前用户输入；
-- CrossWOZ 动态 `user_state` 对应的目标状态；
-- 下一系统轮 `sys_state_init` 对应的只读查询参数。
-
-当前提交的数据规模：
-
-| 划分 | 样本数 | 说明 |
-| --- | ---: | --- |
-| train | 1,968 | 分层抽样的真实轮次 + 160 条缺参安全样本 |
-| validation | 440 | 400 条真实轮次 + 40 条缺参安全样本 |
-| test | 440 | 400 条真实轮次 + 40 条缺参安全样本 |
-| challenge | 80 | 指代、修正、跨领域、拒绝误调用等难例切片 |
-
-CrossWOZ 几乎总会提供完整路线参数，无法直接检验模型是否会在缺参时停下来。因此项目从各自数据划分中的真实地点值构造了少量、显式标记为 `controlled_required_slot_ablation` 的安全样本；具体数量和标签来源写在 [`data/tool_use/manifest.json`](data/tool_use/manifest.json)，不会把受控构造样本冒充自然对话。
-
-## 实验结果
-
-在 RTX 3060 Laptop 6GB 上冻结 Gemma 3-1B 基座，以 4bit QLoRA 训练 1 个 epoch（1,968 条训练样本、440 条验证样本），再在互不重叠的 440 条 test 和 80 条 challenge 上使用贪心解码评测。
+实验在 RTX 3060 Laptop 6GB 上完成：1,968 条训练样本、440 条验证样本，4bit QLoRA 训练 1 epoch；随后在固定 440 条 test 与 80 条 challenge 上以贪心解码评测。
 
 | 指标 | Base（test） | QLoRA（test） | QLoRA（challenge） |
 | --- | ---: | ---: | ---: |
@@ -69,139 +49,156 @@ CrossWOZ 几乎总会提供完整路线参数，无法直接检验模型是否�
 | 追问决策准确率 | 0.00% | **100.00%** | **100.00%** |
 | 非工具轮误调用率 ↓ | 0.00%¹ | 11.36% | **9.52%** |
 
-¹ Base 的 0% 来自几乎无法产生合法结构和工具调用，并不代表它具备更好的拒绝误调用能力。
+¹ Base 几乎不能输出合法协议，因此没有形成有效工具调用；该 0% 不代表更安全。
 
-结果表明，后训练对结构化输出、状态维护和决策路由的提升能够延续到 challenge 难例；同时参数精确生成仍是明确短板。完整对比、决策混淆矩阵、状态长度分桶和失败样例见 [`reports/EXPERIMENT_REPORT.md`](reports/EXPERIMENT_REPORT.md)。项目保留参数完全匹配率，不以较宽松的 Slot F1 替代严格指标，也不因 10 条 test / 2 条 challenge 路线样本量过小而主推必填参数准确率。
+结果证明后训练显著改善了协议遵循、状态维护和工具路由，但也暴露出三个真实短板：长状态全量匹配、参数精确生成、结束语误调用。项目保留严格指标和失败样例，不用宽松 Slot F1 掩盖 Exact Match 问题。完整结果见 [实验报告](reports/EXPERIMENT_REPORT.md) 与 [分场景基准](reports/BENCHMARK_REPORT.md)。
 
-## 输出契约与安全边界
+## 1. Canonical Agent Trace
 
-模型必须只输出一个 JSON 对象：
+每条训练样本先被解释为统一 Trace，而不是散落的 Prompt 拼接：
 
 ```json
 {
-  "belief_state": [
-    {
-      "goal_id": 1,
-      "domain": "地铁",
-      "constraints": {"出发地": "故宫"},
-      "requested_fields": []
-    }
+  "schema_version": "1.0",
+  "trace_id": "controlled_test_xxx",
+  "context": {
+    "history": [],
+    "previous_state": [],
+    "current_user": "我从故宫出发，帮我叫辆出租车。"
+  },
+  "tools": [{"type": "function", "function": {"name": "request_taxi"}}],
+  "events": [
+    {"stage": "model_target", "payload": {"decision": "ask_user"}},
+    {"stage": "policy_target", "payload": {"status": "needs_input"}}
   ],
-  "decision": "ask_user",
-  "tool_call": null,
-  "missing_slots": ["目的地"]
+  "provenance": {"type": "controlled_required_slot_ablation"}
 }
 ```
 
-运行时不直接相信这段 JSON。[`tool_use.py`](src/gemma_eval/tool_use.py) 会依次检查字段、枚举、工具名、必填参数和风险级别。风险不是模型预测出来的，而是固定在工具注册表中；这样模型无法通过输出一句“这是安全操作”绕过人工确认。
-
-## 本地运行
-
-环境要求：Python 3.10+；训练和 4bit 推理需要 NVIDIA GPU。首次运行前，需要在 Hugging Face 接受 [`google/gemma-3-1b-it`](https://huggingface.co/google/gemma-3-1b-it) 许可，并执行一次 `hf auth login`，或将 `.env.example` 复制为 `.env` 后填入只读 Token。
-
-`nvidia-smi` 能看到显卡不等于当前 Python 安装了 CUDA 版 PyTorch。训练前先确认下面命令输出 `True`；若为 `False`，需要按 [PyTorch 官方安装页](https://pytorch.org/get-started/locally/) 为当前 Python 安装与驱动匹配的 CUDA 版本。
+Trace 统一承载上下文、工具声明、目标状态转移、预期策略结果与数据来源。训练脚本通过 `render_sft_pair` 将 Trace 渲染为原有的 Gemma Prompt/JSON target，因此不改变已完成实验的监督目标；导出脚本则可生成便于审计和迁移的 JSONL。
 
 ```powershell
-python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+.\run_local.ps1 -Mode trace
 ```
+
+数据来自 [CrossWOZ](https://github.com/thu-coai/CrossWOZ) 官方划分。项目保留最近 6 轮对话、上一轮累计状态、当前输入以及下一系统轮的数据库查询标签；另外使用 split 内真实地点值构造显式标记的单槽位消融样本，用于测试缺参时能否停止。
+
+## 2. QLoRA 后训练
+
+| 配置 | 实际值 |
+| --- | --- |
+| 基座 | `google/gemma-3-1b-it` |
+| 量化 | 4bit NF4 + double quant，FP16 计算 |
+| LoRA | r=16，alpha=32，dropout=0.05 |
+| 目标层 | q/k/v/o + gate/up/down projection |
+| 最大长度 | 1,024 tokens |
+| batch | micro batch 1，gradient accumulation 8 |
+| 可训练参数 | 13,045,760，约 1.29% |
+| 实际训练 | 1 epoch，约 3 小时 17 分钟 |
+
+Base 权重被冻结，Prompt token 的 label 设为 `-100`，只对目标 JSON 计算 Causal LM loss。序列过长时优先截断最早的 Prompt token，尽量保留完整监督答案。
+
+## 3. Guarded Agent Runtime
+
+模型输出不会直接触发工具。运行时依次经过：
+
+1. `contracts.py`：严格 JSON、字段类型、decision 不变量；
+2. `tool_registry.py`：工具白名单、参数 Schema、风险级别和执行器元数据；
+3. `policy.py`：必填参数检查、只读/副作用授权；
+4. `local_tools.py`：可复现的 SQLite 查询与模拟副作用执行；
+5. `runtime.py`：串联各阶段并生成可审计事件 Trace。
+
+| 模型提议 | Policy 结果 | 系统行为 |
+| --- | --- | --- |
+| `query_hotel_db` 且参数合法 | `auto_execute` | 执行只读查询 |
+| 路线缺少目的地 | `needs_input` | 停止并追问 |
+| `request_taxi` 参数完整 | `pending_confirmation` | 不自动执行，等待确认 |
+| `no_tool` | `no_tool` | 不触发任何工具 |
+
+风险来自注册表而不是模型字段，因此模型不能通过生成“操作安全”来提升自己的权限。
+
+## 4. Eval Harness
+
+评测不是只看一个 accuracy，而是拆成：
+
+- 格式层：严格 JSON、Schema 合法率；
+- 状态层：JGA、Slot Precision / Recall / F1；
+- 决策层：`call_tool / ask_user / no_tool` 混淆矩阵；
+- 工具层：工具准确率、参数 Exact Match 与参数 Slot F1；
+- 安全层：缺参追问、非工具轮误调用、副作用工具拦截；
+- 泛化层：指代、修正、跨领域、长状态等 challenge 切片。
+
+```powershell
+.\run_local.ps1 -Mode analyze
+.\run_local.ps1 -Mode benchmark
+```
+
+本地 Benchmark 的设计受 BFCL/When2Call 的分层思路启发，但它使用本项目固定数据，不冒充 BFCL 官方分数。
+
+## 快速运行
+
+环境要求：Python 3.10+；训练与 4bit 推理需要 NVIDIA GPU。首次运行需要在 Hugging Face 接受 [`google/gemma-3-1b-it`](https://huggingface.co/google/gemma-3-1b-it) 许可，并通过 `hf auth login` 或本地 `.env` 提供只读 Token。
 
 ```powershell
 python -m pip install -e ".[dev]"
 python -m pytest -q
 ```
 
-本机已经配置 `C:\anaconda\envs\gemma-workorder` 时，可以不激活 Conda，直接用统一入口：
+本机已配置 `C:\anaconda\envs\gemma-workorder` 时，使用统一入口：
 
 ```powershell
 .\run_local.ps1 -Mode check
+.\run_local.ps1 -Mode trace
 .\run_local.ps1 -Mode smoke
 .\run_local.ps1 -Mode train
 .\run_local.ps1 -Mode eval-base
 .\run_local.ps1 -Mode eval-qlora
 .\run_local.ps1 -Mode eval-challenge
 .\run_local.ps1 -Mode analyze
+.\run_local.ps1 -Mode benchmark
 .\run_local.ps1 -Mode demo
 ```
 
-正式使用按 `train → eval-base → eval-qlora → eval-challenge → analyze → demo` 的顺序运行即可。已有三份原始报告时，`analyze` 只做离线统计，不加载模型。
-
-仓库已经提交处理后的数据，无需为了训练重新下载 CrossWOZ：
-
-```powershell
-# 1. Base 模型基线；可先加 --limit 20 做小规模检查
-python scripts/evaluate_tool_use.py --precision 4bit `
-  --output reports/tool_use_base_4bit.json
-
-# 2. 4bit QLoRA；先用 --max-train-samples 32 验证本机环境，再跑完整训练
-python scripts/train_tool_use_qlora.py --max-train-samples 32 `
-  --max-validation-samples 32 --epochs 1 `
-  --output-dir artifacts/tool_use_smoke_adapter
-python scripts/train_tool_use_qlora.py `
-  --output-dir artifacts/tool_use_qlora_adapter
-
-# 3. 在同一测试集上评测 Adapter
-python scripts/evaluate_tool_use.py `
-  --adapter artifacts/tool_use_qlora_adapter `
-  --output reports/tool_use_qlora_4bit.json
-
-# 4. 在独立难例切片上评测
-python scripts/evaluate_tool_use.py `
-  --adapter artifacts/tool_use_qlora_adapter `
-  --dataset data/tool_use/challenge.jsonl `
-  --output reports/tool_use_qlora_challenge_4bit.json
-
-# 5. 选一个 challenge 样本跑完整的“模型—策略—本地工具”链路
-python scripts/run_tool_use_demo.py `
-  --adapter artifacts/tool_use_qlora_adapter --index 0
-
-# 6. 从保存的原始输出生成可提交的实验与错误分析报告
-python scripts/analyze_tool_use_results.py
-```
-
-如需改变抽样规模，单独下载 CrossWOZ 后运行：
-
-```powershell
-python scripts/build_tool_use_dataset.py `
-  --crosswoz-dir C:\path\to\CrossWOZ\data\crosswoz `
-  --output-dir data\tool_use
-```
-
-## 评测口径
-
-[`evaluate_tool_use.py`](scripts/evaluate_tool_use.py) 同时报告：
-
-- 严格 JSON 合法率与 Schema 合法率；
-- 状态联合准确率（JGA）与槽位 Precision / Recall / F1；
-- `call_tool / ask_user / no_tool` 决策准确率；
-- 工具选择准确率与参数完全匹配率；
-- 参数 Slot Precision / Recall / F1 与少量路线工具的必填参数准确率；
-- 不该调用工具时的误调用率。
-
-Base 和 QLoRA 使用同一数据、同一 Prompt、同一贪心解码设置。README 数字来自本机保存的完整输出，并由分析脚本重新关联固定数据集计算；原始逐样本 JSON 默认不提交，避免仓库体积膨胀。
+已有 Adapter 和三份原始预测时，无需重训；运行 `analyze → benchmark → demo` 即可复核结果。
 
 ## 目录
 
 ```text
-data/tool_use/                  固定划分、challenge 切片与本地参考数据
-src/gemma_eval/tool_use.py      Schema、工具注册表、策略与本地执行
-src/gemma_eval/tool_use_data.py Prompt、JSONL 校验与指标
-scripts/build_tool_use_dataset.py
-scripts/train_tool_use_qlora.py
-scripts/evaluate_tool_use.py
-scripts/analyze_tool_use_results.py
-scripts/run_tool_use_demo.py
-tests/test_tool_use.py          主链路测试
-docs/                           设计、学习说明与模型原理附录
+data/tool_use/                     固定数据划分、challenge 与来源清单
+src/gemma_eval/contracts.py        模型输出契约与严格校验
+src/gemma_eval/tool_registry.py    工具 Schema、风险、必填参数
+src/gemma_eval/policy.py           确定性执行策略
+src/gemma_eval/local_tools.py      可复现本地工具
+src/gemma_eval/runtime.py          受控编排与运行 Trace
+src/gemma_eval/traces.py           Canonical Agent Trace 与 SFT 渲染
+src/gemma_eval/benchmark.py        分场景 Benchmark 切片
+scripts/build_tool_use_dataset.py  CrossWOZ → 训练样本
+scripts/export_agent_traces.py     训练样本 → Agent Trace JSONL
+scripts/train_tool_use_qlora.py    4bit QLoRA SFT
+scripts/evaluate_tool_use.py       逐样本模型评测
+scripts/run_agent_benchmark.py     场景级可靠性报告
+scripts/analyze_tool_use_results.py 错误分析与实验报告
+tests/test_tool_use.py             契约、策略、工具、Trace、Benchmark 测试
 ```
 
-`decoding.py`、`gemma3_core.py` 及其测试是早期学习 Gemma 自回归生成、KV Cache 和 Decoder 结构时留下的原理附录，不属于当前求职主线，也不参与上述模型指标。
+`decoding.py` 与 `gemma3_core.py` 是早期手写生成和 Gemma Decoder 对齐实验，保留为模型原理附录，不参与当前主线指标。
 
-## 项目边界
+## 设计来源
 
-- 本地工具使用 CrossWOZ 裁剪数据，只用于可复现实验，不代表实时商户信息；
-- 打车工具仅模拟“等待确认”，没有接入真实派车系统；
-- 受控缺参样本用于安全能力测试，不代表 CrossWOZ 原生分布；
-- 该项目验证的是小模型的上下文状态与工具决策能力，不宣称实现通用 Agent；
-- Adapter、基础模型和 Token 均不提交到 Git。
+本项目没有照搬单一仓库，主要吸收以下公开路线：
 
-详细设计见 [`docs/系统设计与求职定位.md`](docs/系统设计与求职定位.md)，从零熟悉与面试准备顺序见 [`docs/项目学习与面试手册.md`](docs/项目学习与面试手册.md)。
+- [Berkeley Function Calling Leaderboard](https://github.com/ShishirPatil/gorilla/tree/main/berkeley-function-call-leaderboard)：工具选择、参数、格式和多轮场景分层；
+- [NVIDIA When2Call](https://github.com/NVIDIA/NeMo-Agent-Toolkit/tree/develop/packages/nvidia-nat-eval/src/nat/eval/evaluator/evaluate_when2call)：把“不调用/先追问”作为独立能力；
+- [Open Trajectory Gym](https://github.com/vecna-labs/open-trajectory-gym)：用 Trace 串联采集、转换、训练和评测；
+- [qwen35-agent-post-training](https://github.com/CHEN2003-CHIP/qwen35-agent-post-training)：社区项目中对 Tool-Use SFT、策略安全和本地 Benchmark 的工程组织；
+- [Llama3-FunctionCalling](https://github.com/michaelnny/Llama3-FunctionCalling)：工具元数据、LoRA 训练与本地推理的完整链路。
+
+详细取舍见 [系统设计](docs/系统设计与求职定位.md)，从零学习见 [项目学习与面试手册](docs/项目学习与面试手册.md)，简历表述见 [简历与面试表达](docs/简历与面试表达.md)。
+
+## 边界
+
+- 本地工具使用 CrossWOZ 裁剪数据，不代表实时业务数据库；
+- 打车是副作用策略演示，不接入真实派车服务；
+- challenge 是项目内可解释切片，不是 BFCL 官方测试成绩；
+- Adapter、基础模型、Token 和逐样本原始预测不提交到 Git；
+- 当前结论是“小模型在固定任务协议上的后训练与可靠性实验”，不宣称通用或生产级 Agent。

@@ -4,6 +4,7 @@ __pycache__/
 .venv/
 .env
 artifacts/
+data/traces/
 data/raw/
 data/workorder/
 outputs/
